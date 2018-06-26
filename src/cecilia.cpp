@@ -12,8 +12,11 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-int main(int argc, char const *argv[])
+#include <iostream>
+#include "cecilia.hpp"
+
+int main(void)
 {
-    /* code */
+    std::cout << "/* message */" << '\n';
     return 0;
 }

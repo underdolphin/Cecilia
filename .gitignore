@@ -33,3 +33,5 @@
 .ninja_deps
 .ninja_log
 cecilia
+c_cpp_properties.json
+settings.json
