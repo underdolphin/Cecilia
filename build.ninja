@@ -2,7 +2,7 @@ root = .
 srcdir = $root/src
 builddir = build
 cxx = clang++
-cxxflags = -I./src/include -g -Wall -Wextra -Wno-deprecated -Wno-missing-field-initializers -O2
+cxxflags = -I./src/include -g -Wall -Wextra -Wno-deprecated -Wno-missing-field-initializers -O2 -std=c++17
 ar = ar
 ldflags = -L$builddir
 

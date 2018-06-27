@@ -12,5 +12,20 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-#include "Compiler/Lex/TokenLexer.hpp"
-#include "Compiler/Basic/TokenKinds.hpp"
+#include <cstdint>
+
+namespace Cecilia
+{
+namespace Compiler
+{
+namespace Basic
+{
+enum TokenKind : std::uint16_t
+{
+    Identifier,
+    If,
+    For,
+};
+}
+} // namespace Compiler
+} // namespace Cecilia
