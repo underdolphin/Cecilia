@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3266DD60-4E4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cecilia", "src\Cecilia\Cecilia.csproj", "{26DAC972-50D0-402A-9331-4D7DD053F3FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cecilia.Lib", "src\Cecilia.Lib\Cecilia.Lib.csproj", "{98B3587E-415D-46AF-841F-6DA546476978}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,8 +34,21 @@ Global
 		{26DAC972-50D0-402A-9331-4D7DD053F3FE}.Release|x64.Build.0 = Release|Any CPU
 		{26DAC972-50D0-402A-9331-4D7DD053F3FE}.Release|x86.ActiveCfg = Release|Any CPU
 		{26DAC972-50D0-402A-9331-4D7DD053F3FE}.Release|x86.Build.0 = Release|Any CPU
+		{98B3587E-415D-46AF-841F-6DA546476978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98B3587E-415D-46AF-841F-6DA546476978}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98B3587E-415D-46AF-841F-6DA546476978}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{98B3587E-415D-46AF-841F-6DA546476978}.Debug|x64.Build.0 = Debug|Any CPU
+		{98B3587E-415D-46AF-841F-6DA546476978}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{98B3587E-415D-46AF-841F-6DA546476978}.Debug|x86.Build.0 = Debug|Any CPU
+		{98B3587E-415D-46AF-841F-6DA546476978}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98B3587E-415D-46AF-841F-6DA546476978}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98B3587E-415D-46AF-841F-6DA546476978}.Release|x64.ActiveCfg = Release|Any CPU
+		{98B3587E-415D-46AF-841F-6DA546476978}.Release|x64.Build.0 = Release|Any CPU
+		{98B3587E-415D-46AF-841F-6DA546476978}.Release|x86.ActiveCfg = Release|Any CPU
+		{98B3587E-415D-46AF-841F-6DA546476978}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{26DAC972-50D0-402A-9331-4D7DD053F3FE} = {3266DD60-4E44-479E-ADBF-121D862490A9}
+		{98B3587E-415D-46AF-841F-6DA546476978} = {3266DD60-4E44-479E-ADBF-121D862490A9}
 	EndGlobalSection
 EndGlobal
