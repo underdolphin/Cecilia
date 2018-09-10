@@ -57,6 +57,7 @@ namespace Cecilia.Lib
             var Ref = ToTerm("ref");
             var Return = ToTerm("return");
             var Sealed = ToTerm("sealed");
+            var SByte = ToTerm("sbyte");
             var Short = ToTerm("short");
             var Static = ToTerm("static");
             var String = ToTerm("string");
@@ -124,14 +125,35 @@ namespace Cecilia.Lib
             var UnsignedRshiftEq = ToTerm(">>>=");
             #endregion
 
+            #region operators,||punctuation and delimiters
+            RegisterOperators(1, "||");
+            RegisterOperators(2, "&&");
+            RegisterOperators(3, "|");
+            RegisterOperators(4, "^");
+            RegisterOperators(5, "&");
+            RegisterOperators(6, "==", "!=");
+            RegisterOperators(7, "<", ">", "<=", ">=", "is", "as");
+            RegisterOperators(8, "<<", ">>");
+            RegisterOperators(9, "+", "-");
+            RegisterOperators(10, "*", "/", "%");
+            #endregion
             // NonTerminals
             #region Types
             var Type = new NonTerminal("Type");
+            var EmbeddedType = new NonTerminal("EmbeddedType");
+            var UserDefinedType = new NonTerminal("UserDefinedType");
+            var NumericType = new NonTerminal("NumericType");
+            var IntegralType = new NonTerminal("IntegralType");
+            var FloatingPointType = new NonTerminal("FloatingPointType");
             #endregion
 
             // Rules
             #region Types
-            Type.Rule = "";
+            Type.Rule = EmbeddedType;
+            EmbeddedType.Rule = NumericType;
+            NumericType.Rule = IntegralType | FloatingPointType;
+            IntegralType.Rule = Byte | SByte | Short | UShort | Int | UInt | Long | ULong;
+            FloatingPointType.Rule = Float | Double;
             #endregion
 
             Root = Type;
