@@ -159,7 +159,7 @@ namespace Cecilia.Lib
 
             // Rules
             #region Types
-            Type.Rule = EmbeddedType | UserDefinedType;
+            Type.Rule = EmbeddedType;
             EmbeddedType.Rule = NumericType | BoolType | EmbeddedRefType;
             EmbeddedRefType.Rule = String | Object;
             NumericType.Rule = IntegralType | FloatingPointType | DecimalType;
