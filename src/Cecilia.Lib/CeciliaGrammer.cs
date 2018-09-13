@@ -147,22 +147,30 @@ namespace Cecilia.Lib
             var FloatingPointType = new NonTerminal("FloatingPointType");
             var DecimalType = new NonTerminal("DecimalType");
             var BoolType = new NonTerminal("BoolType");
-            var StringType = new NonTerminal("StringType");
             var ClassType = new NonTerminal("ClassType");
-            var EnumType = new NonTerminal("ClassType");
+            var EnumType = new NonTerminal("EnumType");
             var FunctionType = new NonTerminal("FunctionType");
+            var EmbeddedRefType = new NonTerminal("EmbeddedRefType");
+            #endregion
+
+            #region Namespaces
+            var NamespaceOrTypeName = new NonTerminal("NamespaceOrTypeName");
             #endregion
 
             // Rules
             #region Types
             Type.Rule = EmbeddedType | UserDefinedType;
-            EmbeddedType.Rule = NumericType | BoolType | StringType;
+            EmbeddedType.Rule = NumericType | BoolType | EmbeddedRefType;
+            EmbeddedRefType.Rule = String | Object;
             NumericType.Rule = IntegralType | FloatingPointType | DecimalType;
             IntegralType.Rule = Byte | SByte | Short | UShort | Int | UInt | Long | ULong | Char;
             FloatingPointType.Rule = Float | Double;
             DecimalType.Rule = Decimal;
             BoolType.Rule = Bool;
-            StringType.Rule = String;
+            #endregion
+
+            #region Namespaces
+            NamespaceOrTypeName.Rule = Identifier | NamespaceOrTypeName + Dot + Identifier;
             #endregion
 
             Root = Type;
