@@ -67,7 +67,7 @@ namespace Cecilia.Lib
             var UInt = ToTerm("uint");
             var ULong = ToTerm("ulong");
             var UShort = ToTerm("ushort");
-            var Using = ToTerm("ushort");
+            var Using = ToTerm("using");
             var Var = ToTerm("var");
             var Virtual = ToTerm("virtual");
             var Void = ToTerm("void");
@@ -151,15 +151,31 @@ namespace Cecilia.Lib
             var EnumType = new NonTerminal("EnumType");
             var FunctionType = new NonTerminal("FunctionType");
             var EmbeddedRefType = new NonTerminal("EmbeddedRefType");
+            var TypeArgumentList = new NonTerminal("TypeArgumentList");
+            var TypeArguments = new NonTerminal("TypeArguments");
             #endregion
 
             #region Namespaces
+            var CompilationUnit = new NonTerminal("CompilationUnit ");
+            var UsingDirectivesOpt = new NonTerminal("UsingDirectivesOpt");
+            var UsingDirectives = new NonTerminal("UsingDirectives");
+            var UsingDirective = new NonTerminal("UsingDirective");
+            var UsingAliasDirective = new NonTerminal("UsingAliasDirective");
+            var UsingNamespaceDirective = new NonTerminal("UsingNamespaceDirective");
+            var UsingStaticDirective = new NonTerminal("UsingStaticDirective");
+            var NamespaceMemberDeclarationsOpt = new NonTerminal("NamespaceMemberDeclationsOpt");
+            var NamespaceMemberDeclarations = new NonTerminal("NamespaceMemberDeclations");
+            var NamespaceMemberDeclaration = new NonTerminal("NamespaceMemberDeclation");
+            var NamespaceDeclaration = new NonTerminal("NamespaceDeclaration");
             var NamespaceOrTypeName = new NonTerminal("NamespaceOrTypeName");
+            var NamespaceBody = new NonTerminal("NamespaceBody");
+            var TypeDeclaration = new NonTerminal("TypeDeclaration");
+
             #endregion
 
             // Rules
             #region Types
-            Type.Rule = EmbeddedType;
+            Type.Rule = EmbeddedType | UserDefinedType;
             EmbeddedType.Rule = NumericType | BoolType | EmbeddedRefType;
             EmbeddedRefType.Rule = String | Object;
             NumericType.Rule = IntegralType | FloatingPointType | DecimalType;
@@ -167,13 +183,29 @@ namespace Cecilia.Lib
             FloatingPointType.Rule = Float | Double;
             DecimalType.Rule = Decimal;
             BoolType.Rule = Bool;
+            UserDefinedType.Rule = NamespaceOrTypeName;
+            TypeArgumentList.Rule = Less + TypeArguments + Great;
+            TypeArguments.Rule = MakeStarRule(TypeArguments, Comma, Type);
+
             #endregion
 
             #region Namespaces
-            NamespaceOrTypeName.Rule = Identifier | NamespaceOrTypeName + Dot + Identifier;
+            CompilationUnit.Rule = UsingDirectivesOpt + NamespaceMemberDeclarationsOpt;
+            UsingDirectivesOpt.Rule = Empty | UsingDirectives;
+            UsingDirectives.Rule = MakePlusRule(UsingDirectives, UsingDirective);
+            UsingDirective.Rule = UsingAliasDirective | UsingNamespaceDirective | UsingStaticDirective;
+            UsingAliasDirective.Rule = Using + Identifier + Assign + NamespaceOrTypeName + Semicolon;
+            UsingNamespaceDirective.Rule = Using + NamespaceOrTypeName + Semicolon;
+            UsingStaticDirective.Rule = Using + Static + NamespaceOrTypeName + Semicolon;
+            NamespaceMemberDeclarationsOpt.Rule = Empty | NamespaceMemberDeclarations;
+            NamespaceMemberDeclarations.Rule = MakePlusRule(NamespaceMemberDeclarations, NamespaceMemberDeclaration);
+            NamespaceMemberDeclaration.Rule = NamespaceDeclaration /*| TypeDeclaration*/;
+            NamespaceDeclaration.Rule = Namespace + NamespaceOrTypeName + NamespaceBody + Semicolon.Q();
+            NamespaceOrTypeName.Rule = MakeStarRule(NamespaceOrTypeName, Dot, Identifier);
+            NamespaceBody.Rule = Lbrace + UsingDirectivesOpt + NamespaceMemberDeclarationsOpt + Rbrace;
             #endregion
 
-            Root = Type;
+            Root = CompilationUnit;
         }
     }
 }
