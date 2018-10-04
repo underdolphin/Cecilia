@@ -5,3 +5,4 @@ Ceciliaはマルチパラダイムなプログラミング言語です。名前�
 ## 言語仕様など
 
 * [コアリファレンス](https://underdolphin.github.io/Cecilia/ja/core-reference-ja.html)
+* [Examples](https://underdolphin.github.io/Cecilia/ja/examples.html)
