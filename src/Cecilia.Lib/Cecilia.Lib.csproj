@@ -1,11 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Irony" Version="1.0.0-beta1" />
+    <PackageReference Include="Sprache" Version="2.2.0"/>
   </ItemGroup>
-
 </Project>
