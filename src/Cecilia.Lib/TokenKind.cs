@@ -10,7 +10,7 @@
         Whitespace,
         #endregion
 
-        #region Sign and Punctions
+        #region Sign and Punctions and Symbols
         /// <summary>
         /// (
         /// </summary>
@@ -20,13 +20,21 @@
         /// </summary>
         RParen,
         /// <summary>
-        /// {
+        /// [
         /// </summary>
         LBracket,
         /// <summary>
+        /// ]
+        /// </summary>
+        RBracket,
+        /// <summary>
+        /// {
+        /// </summary>
+        LBrace,
+        /// <summary>
         /// }
         /// </summary>
-        RBracket
+        RBrace
         #endregion
     }
 }

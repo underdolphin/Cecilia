@@ -12,8 +12,10 @@ namespace Cecilia.Test
             #region Sign and punction test
             Assert.Equal((TokenKind.LParen, 1), new Lexer().GetTokenKind("(", 0));
             Assert.Equal((TokenKind.RParen, 1), new Lexer().GetTokenKind(")", 0));
-            Assert.Equal((TokenKind.LBracket, 1), new Lexer().GetTokenKind("{", 0));
-            Assert.Equal((TokenKind.RBracket, 1), new Lexer().GetTokenKind("}", 0));
+            Assert.Equal((TokenKind.LBrace, 1), new Lexer().GetTokenKind("{", 0));
+            Assert.Equal((TokenKind.RBrace, 1), new Lexer().GetTokenKind("}", 0));
+            Assert.Equal((TokenKind.LBracket, 1), new Lexer().GetTokenKind("[", 0));
+            Assert.Equal((TokenKind.RBracket, 1), new Lexer().GetTokenKind("]", 0));
             #endregion
         }
     }
