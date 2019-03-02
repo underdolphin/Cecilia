@@ -10,7 +10,7 @@
         Whitespace,
         #endregion
 
-        #region Sign and Punctions and Symbols
+        #region Single Charactor Punctuations
         /// <summary>
         /// (
         /// </summary>
@@ -34,7 +34,98 @@
         /// <summary>
         /// }
         /// </summary>
-        RBrace
+        RBrace,
+        /// <summary>
+        /// !
+        /// </summary>
+        Exclamation,
+        /// <summary>
+        /// $
+        /// </summary>
+        Dollar,
+        /// <summary>
+        /// %
+        /// </summary>
+        Parcent,
+        /// <summary>
+        /// ^
+        /// </summary>
+        Caret,
+        /// <summary>
+        /// &
+        /// </summary>
+        Ampersand,
+        /// <summary>
+        /// *
+        /// </summary>
+        Asterisk,
+        /// <summary>
+        /// -
+        /// </summary>
+        Minus,
+        /// <summary>
+        /// +
+        /// </summary>
+        Plus,
+        /// <summary>
+        /// =
+        /// </summary>
+        Equals,
+        /// <summary>
+        /// |
+        /// </summary>
+        Bar,
+        /// <summary>
+        /// \
+        /// </summary>
+        Backslash,
+        /// <summary>
+        /// :
+        /// </summary>
+        Colon,
+        /// <summary>
+        /// ;
+        /// </summary>
+        SemiColon,
+        /// <summary>
+        /// "
+        /// </summary>
+        DoubleQuote,
+        /// <summary>
+        /// '
+        /// </summary>
+        SingleQuote,
+        /// <summary>
+        /// <
+        /// </summary>
+        LessThan,
+        /// <summary>
+        /// >
+        /// </summary>
+        GreaterThan,
+        /// <summary>
+        /// ,
+        /// </summary>
+        Comma,
+        /// <summary>
+        /// .
+        /// </summary>
+        Dot,
+        /// <summary>
+        /// ?
+        /// </summary>
+        Question,
+        /// <summary>
+        /// #
+        /// </summary>
+        Hash,
+        /// <summary>
+        /// /
+        /// </summary>
+        Slash,
+        #endregion
+
+        #region Keywords
         #endregion
     }
 }

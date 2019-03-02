@@ -60,6 +60,50 @@ namespace Cecilia.Lib
                     return (TokenKind.LBracket, ++nextPos);
                 case ']':
                     return (TokenKind.RBracket, ++nextPos);
+                case '!':
+                    return (TokenKind.Exclamation, ++nextPos);
+                case '$':
+                    return (TokenKind.Dollar, ++nextPos);
+                case '%':
+                    return (TokenKind.Parcent, ++nextPos);
+                case '^':
+                    return (TokenKind.Caret, ++nextPos);
+                case '&':
+                    return (TokenKind.Ampersand, ++nextPos);
+                case '*':
+                    return (TokenKind.Asterisk, ++nextPos);
+                case '-':
+                    return (TokenKind.Minus, ++nextPos);
+                case '+':
+                    return (TokenKind.Plus, ++nextPos);
+                case '=':
+                    return (TokenKind.Equals, ++nextPos);
+                case '|':
+                    return (TokenKind.Bar, ++nextPos);
+                case '\\':
+                    return (TokenKind.Backslash, ++nextPos);
+                case ':':
+                    return (TokenKind.Colon, ++nextPos);
+                case ';':
+                    return (TokenKind.SemiColon, ++nextPos);
+                case '\"':
+                    return (TokenKind.DoubleQuote, ++nextPos);
+                case '\'':
+                    return (TokenKind.SingleQuote, ++nextPos);
+                case '<':
+                    return (TokenKind.LessThan, ++nextPos);
+                case '>':
+                    return (TokenKind.GreaterThan, ++nextPos);
+                case ',':
+                    return (TokenKind.Comma, ++nextPos);
+                case '.':
+                    return (TokenKind.Dot, ++nextPos);
+                case '?':
+                    return (TokenKind.Question, ++nextPos);
+                case '#':
+                    return (TokenKind.Hash, ++nextPos);
+                case '/':
+                    return (TokenKind.Slash, ++nextPos);
                 default:
                     break;
             }
