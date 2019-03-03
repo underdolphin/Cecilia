@@ -11,6 +11,7 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
+using Cecilia.Lib;
 using System;
 
 namespace Cecilia
@@ -19,7 +20,7 @@ namespace Cecilia
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine(new Lexer().GetTokenKind("[", 0));
         }
     }
 }

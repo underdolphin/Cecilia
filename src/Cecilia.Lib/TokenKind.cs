@@ -6,9 +6,10 @@
         Unknown,
         #endregion
 
-        #region Ignores
         Whitespace,
-        #endregion
+        SingleLineComment,
+        MultiLineCommentStart,
+        MultiLineCommentEnd,
 
         #region Single Charactor Punctuations
         /// <summary>
@@ -124,6 +125,8 @@
         /// </summary>
         Slash,
         #endregion
+
+
 
         #region Keywords
         /// <summary>

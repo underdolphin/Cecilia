@@ -24,6 +24,13 @@ namespace Cecilia.Lib
         public string IntegerFloatStr { get; set; }
         public string IntegerDoubleStr { get; set; }
 
+        private LexerUtils Utils { get; set; }
+
+        public Lexer()
+        {
+            Utils = new LexerUtils();
+        }
+
         public List<TokenKind> LexicalEngine(string targetStr)
         {
             throw new NotImplementedException();
@@ -43,10 +50,27 @@ namespace Cecilia.Lib
                 return (TokenKind.Whitespace, ++nextPos);
             }
 
-            var singlePuctuationResult = SinglePunctuationLexer(targetChar, nextPos);
-            if (singlePuctuationResult.kind != TokenKind.Unknown)
+            int nextPos2 = nextPos + 1; // １つ先読み用
+            int nextPos3 = nextPos2 + 1; // ２つ先読み用
+
+            if (Utils.IsSyntaxPunctuation(targetChar))
             {
-                return singlePuctuationResult;
+                if (targetStr.Length >= 2 && Utils.IsSyntaxPunctuation(targetStr[nextPos2]))
+                {
+                    if (targetStr.Length >= 3 && Utils.IsSyntaxPunctuation(targetStr[nextPos3]))
+                    {
+                        // 3文字記号演算子
+                        return (TokenKind.Unknown, 0);
+                    }
+                    // 2文字記号演算子
+                    return (TokenKind.Unknown, 0);
+                }
+                // 1文字記号演算子
+                var singlePuctuationResult = SinglePunctuationLexer(targetChar, nextPos);
+                if (singlePuctuationResult.kind != TokenKind.Unknown)
+                {
+                    return singlePuctuationResult;
+                }
             }
 
             return (TokenKind.Unknown, 0);
