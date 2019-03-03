@@ -43,6 +43,17 @@ namespace Cecilia.Lib
                 return (TokenKind.Whitespace, ++nextPos);
             }
 
+            var singlePuctuationResult = SinglePunctuationLexer(nextChar, nextPos);
+            if (singlePuctuationResult.kind != TokenKind.Unknown)
+            {
+                return singlePuctuationResult;
+            }
+
+            return (TokenKind.Unknown, 0);
+        }
+
+        private (TokenKind kind, int nextPos) SinglePunctuationLexer(char nextChar, int nextPos)
+        {
             /* 対象の文字列が1文字でトークンを構成する場合、
              * すぐに種類を判定し、位置を一つ進め処理を終了
              */
@@ -105,10 +116,8 @@ namespace Cecilia.Lib
                 case '/':
                     return (TokenKind.Slash, ++nextPos);
                 default:
-                    break;
+                    return (TokenKind.Unknown, 0);
             }
-
-            return (TokenKind.Unknown, 0);
         }
     }
 }

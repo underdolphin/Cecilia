@@ -126,6 +126,10 @@
         #endregion
 
         #region Keywords
+        /// <summary>
+        /// const
+        /// </summary>
+        ConstKeyword,
         #endregion
     }
 }
