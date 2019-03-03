@@ -36,14 +36,14 @@ namespace Cecilia.Lib
 
         public (TokenKind kind, int nextPos) GetTokenKind(string targetStr, int nextPos)
         {
-            char nextChar = targetStr[nextPos];
-            if (char.IsWhiteSpace(nextChar))
+            char targetChar = targetStr[nextPos];
+            if (char.IsWhiteSpace(targetChar))
             {
                 // 読み取り対象位置の文字が空白だった場合、位置を一つ進め処理を終了
                 return (TokenKind.Whitespace, ++nextPos);
             }
 
-            var singlePuctuationResult = SinglePunctuationLexer(nextChar, nextPos);
+            var singlePuctuationResult = SinglePunctuationLexer(targetChar, nextPos);
             if (singlePuctuationResult.kind != TokenKind.Unknown)
             {
                 return singlePuctuationResult;
@@ -52,12 +52,12 @@ namespace Cecilia.Lib
             return (TokenKind.Unknown, 0);
         }
 
-        private (TokenKind kind, int nextPos) SinglePunctuationLexer(char nextChar, int nextPos)
+        private (TokenKind kind, int nextPos) SinglePunctuationLexer(char targetChar, int nextPos)
         {
             /* 対象の文字列が1文字でトークンを構成する場合、
              * すぐに種類を判定し、位置を一つ進め処理を終了
              */
-            switch (nextChar)
+            switch (targetChar)
             {
                 case '(':
                     return (TokenKind.LParen, ++nextPos);
