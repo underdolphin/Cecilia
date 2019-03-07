@@ -6,6 +6,7 @@
         Unknown,
         #endregion
 
+        LexerEnd,
         Whitespace,
         SingleLineComment,
         MultiLineCommentStart,
@@ -126,7 +127,91 @@
         Slash,
         #endregion
 
+        #region Double Charactor Punctuations
+        /// <summary>
+        /// ||
+        /// </summary>
+        BarBar,
+        /// <summary>
+        /// &&
+        /// </summary>
+        AmpAmp,
+        /// <summary>
+        /// --
+        /// </summary>
+        MinusMinus,
+        /// <summary>
+        /// ++
+        /// </summary>
+        PlusPlus,
+        /// <summary>
+        /// ??
+        /// </summary>
+        QuestionQuestion,
+        /// <summary>
+        /// ==
+        /// </summary>
+        EqualsEquals,
+        /// <summary>
+        /// !=
+        /// </summary>
+        ExclamationEquals,
+        /// <summary>
+        /// =>
+        /// </summary>
+        Arrow,
+        /// <summary>
+        /// <=
+        /// </summary>
+        LessThanEqual,
+        /// <summary>
+        /// >=
+        /// </summary>
+        GreaterThanEqual,
+        /// <summary>
+        /// <<
+        /// </summary>
+        LessThanLessThan,
+        /// <summary>
+        /// >>
+        /// </summary>
+        GreaterThanGreaterThan,
+        /// <summary>
+        /// +=
+        /// </summary>
+        PlusEqual,
+        /// <summary>
+        /// -=
+        /// </summary>
+        MinusEqual,
+        /// <summary>
+        /// *=
+        /// </summary>
+        AsteriskEqual,
+        /// <summary>
+        /// /=
+        /// </summary>
+        SlashEqual,
+        /// <summary>
+        /// |=
+        /// </summary>
+        BarEqual,
+        /// <summary>
+        /// ^=
+        /// </summary>
+        CaretEqual,
+        #endregion
 
+        #region Triple character punctuation
+        /// <summary>
+        /// <<=
+        /// </summary>
+        LessThanLessThanEqual,
+        /// <summary>
+        /// >>=
+        /// </summary>
+        GreaterThanGreaterThanEqual,
+        #endregion
 
         #region Keywords
         /// <summary>
