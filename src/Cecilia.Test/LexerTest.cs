@@ -55,7 +55,7 @@ namespace Cecilia.Test
         }
         #endregion
 
-        #region Double and punction test
+        #region Double punction test
         [Fact(DisplayName = "GetDoublePunctuationTokenTest")]
         public void GetDoublePunctuationTokenTest()
         {
@@ -84,11 +84,13 @@ namespace Cecilia.Test
         }
         #endregion
 
+        #region Triple punction test
         [Fact(DisplayName = "GetTriplePunctuationTokenTest")]
         public void GetTriplePunctuationTokenTest()
         {
             Assert.Equal((TokenKind.LessThanLessThanEqual, 3), new Lexer().GetTokenKind("<<=", 0));
             Assert.Equal((TokenKind.GreaterThanGreaterThanEqual, 3), new Lexer().GetTokenKind(">>=", 0));
         }
+        #endregion
     }
 }
