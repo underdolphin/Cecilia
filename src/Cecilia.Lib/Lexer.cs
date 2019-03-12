@@ -82,6 +82,8 @@ namespace Cecilia.Lib
                 }
             }
 
+
+
             return (TokenKind.Unknown, 0);
         }
 
@@ -92,6 +94,12 @@ namespace Cecilia.Lib
              */
             switch (targetStr)
             {
+                case "//":
+                    return (TokenKind.SingleLineComment, nextPos += 2);
+                case "/*":
+                    return (TokenKind.MultiLineCommentStart, nextPos += 2);
+                case "*/":
+                    return (TokenKind.MultiLineCommentEnd, nextPos += 2);
                 case "||":
                     return (TokenKind.BarBar, nextPos += 2);
                 case "&&":

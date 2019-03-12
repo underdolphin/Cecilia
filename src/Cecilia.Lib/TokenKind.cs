@@ -21,9 +21,6 @@ namespace Cecilia.Lib
 
         LexerEnd,
         Whitespace,
-        SingleLineComment,
-        MultiLineCommentStart,
-        MultiLineCommentEnd,
 
         #region Single Charactor Punctuations
         /// <summary>
@@ -140,6 +137,21 @@ namespace Cecilia.Lib
         Slash,
         #endregion
 
+        #region Comment
+        /// <summary>
+        /// //
+        /// </summary>
+        SingleLineComment,
+        /// <summary>
+        /// /*
+        /// </summary>
+        MultiLineCommentStart,
+        /// <summary>
+        /// */
+        /// </summary>
+        MultiLineCommentEnd,
+        #endregion
+
         #region Double Charactor Punctuations
         /// <summary>
         /// ||
@@ -224,13 +236,6 @@ namespace Cecilia.Lib
         /// >>=
         /// </summary>
         GreaterThanGreaterThanEqual,
-        #endregion
-
-        #region Keywords
-        /// <summary>
-        /// const
-        /// </summary>
-        ConstKeyword,
         #endregion
     }
 }

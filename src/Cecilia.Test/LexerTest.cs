@@ -18,11 +18,12 @@ namespace Cecilia.Test
 {
     public class LexerTest
     {
+        #region Sign and punction test
         [Fact(DisplayName = "GetSinglePunctuationTokenTest")]
         public void GetSinglePunctuationTokenTest()
         {
             Assert.Equal((TokenKind.Whitespace, 1), new Lexer().GetTokenKind(" ", 0));
-            #region Sign and punction test
+
             Assert.Equal((TokenKind.LParen, 1), new Lexer().GetTokenKind("(", 0));
             Assert.Equal((TokenKind.RParen, 1), new Lexer().GetTokenKind(")", 0));
             Assert.Equal((TokenKind.LBrace, 1), new Lexer().GetTokenKind("{", 0));
@@ -51,13 +52,17 @@ namespace Cecilia.Test
             Assert.Equal((TokenKind.Question, 1), new Lexer().GetTokenKind("?", 0));
             Assert.Equal((TokenKind.Hash, 1), new Lexer().GetTokenKind("#", 0));
             Assert.Equal((TokenKind.Slash, 1), new Lexer().GetTokenKind("/", 0));
-            #endregion
         }
+        #endregion
 
+        #region Double and punction test
         [Fact(DisplayName = "GetDoublePunctuationTokenTest")]
         public void GetDoublePunctuationTokenTest()
         {
-            #region Sign and punction test
+            Assert.Equal((TokenKind.SingleLineComment, 2), new Lexer().GetTokenKind("//", 0));
+            Assert.Equal((TokenKind.MultiLineCommentStart, 2), new Lexer().GetTokenKind("/*", 0));
+            Assert.Equal((TokenKind.MultiLineCommentEnd, 2), new Lexer().GetTokenKind("*/", 0));
+
             Assert.Equal((TokenKind.BarBar, 2), new Lexer().GetTokenKind("||", 0));
             Assert.Equal((TokenKind.AmpAmp, 2), new Lexer().GetTokenKind("&&", 0));
             Assert.Equal((TokenKind.MinusMinus, 2), new Lexer().GetTokenKind("--", 0));
@@ -76,8 +81,8 @@ namespace Cecilia.Test
             Assert.Equal((TokenKind.SlashEqual, 2), new Lexer().GetTokenKind("/=", 0));
             Assert.Equal((TokenKind.BarEqual, 2), new Lexer().GetTokenKind("|=", 0));
             Assert.Equal((TokenKind.CaretEqual, 2), new Lexer().GetTokenKind("^=", 0));
-            #endregion
         }
+        #endregion
 
         [Fact(DisplayName = "GetTriplePunctuationTokenTest")]
         public void GetTriplePunctuationTokenTest()
