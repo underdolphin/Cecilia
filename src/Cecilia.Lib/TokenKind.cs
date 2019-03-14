@@ -21,6 +21,7 @@ namespace Cecilia.Lib
 
         LexerEnd,
         Whitespace,
+        Identifier,
 
         #region Single Charactor Punctuations
         /// <summary>
@@ -236,6 +237,81 @@ namespace Cecilia.Lib
         /// >>=
         /// </summary>
         GreaterThanGreaterThanEqual,
+        #endregion
+
+        #region Compiler embedded type keywords
+        #region Number basic type keywords
+        /// <summary>
+        /// void
+        /// </summary>
+        VoidKeyword,
+        /// <summary>
+        /// int8
+        /// </summary>
+        Int8Keyword,
+        /// <summary>
+        /// int16
+        /// </summary>
+        Int16Keyword,
+        /// <summary>
+        /// int32
+        /// </summary>
+        Int32Keyword,
+        /// <summary>
+        /// int64
+        /// </summary>
+        Int64Keyword,
+        /// <summary>
+        /// uint8
+        /// </summary>
+        UInt8Keyword,
+        /// <summary>
+        /// uint16
+        /// </summary>
+        UInt16Keyword,
+        /// <summary>
+        /// uint32
+        /// </summary>
+        UInt32Keyword,
+        /// <summary>
+        /// uint64
+        /// </summary>
+        UInt64Keyword,
+        /// <summary>
+        /// half -- 16bit floating-point
+        /// </summary>
+        HalfKeyword,
+        /// <summary>
+        /// float -- 32bit floating-point
+        /// </summary>
+        FloatKeyword,
+        /// <summary>
+        /// double -- 64bit floating-point
+        /// </summary>
+        DoubleKeyword,
+        #endregion
+
+        #region other basic type keywords
+        /// <summary>
+        /// bool
+        /// </summary>
+        BoolKeyword,
+        /// <summary>
+        /// char
+        /// </summary>
+        CharKeyword,
+        #endregion
+
+        #region other special support keywords
+        /// <summary>
+        /// string
+        /// </summary>
+        StringKeyword,
+        /// <summary>
+        /// object
+        /// </summary>
+        ObjectKeyword,
+        #endregion
         #endregion
     }
 }

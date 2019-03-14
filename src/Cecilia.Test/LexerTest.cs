@@ -92,5 +92,36 @@ namespace Cecilia.Test
             Assert.Equal((TokenKind.GreaterThanGreaterThanEqual, 3), new Lexer().GetTokenKind(">>=", 0));
         }
         #endregion
+
+        #region embedded type keywords test
+        [Fact(DisplayName = "EmbeddedTypeKeywordTest")]
+        public void GetEmbeddedTypeKeywordTest()
+        {
+            Assert.Equal((TokenKind.VoidKeyword, 4), new Lexer().GetTokenKind("void", 0));
+            Assert.Equal((TokenKind.Int8Keyword, 4), new Lexer().GetTokenKind("int8", 0));
+            Assert.Equal((TokenKind.Int16Keyword, 5), new Lexer().GetTokenKind("int16", 0));
+            Assert.Equal((TokenKind.Int32Keyword, 5), new Lexer().GetTokenKind("int32", 0));
+            Assert.Equal((TokenKind.Int64Keyword, 5), new Lexer().GetTokenKind("int64", 0));
+            Assert.Equal((TokenKind.UInt8Keyword, 5), new Lexer().GetTokenKind("uint8", 0));
+            Assert.Equal((TokenKind.UInt16Keyword, 6), new Lexer().GetTokenKind("uint16", 0));
+            Assert.Equal((TokenKind.UInt32Keyword, 6), new Lexer().GetTokenKind("uint32", 0));
+            Assert.Equal((TokenKind.UInt64Keyword, 6), new Lexer().GetTokenKind("uint64", 0));
+            Assert.Equal((TokenKind.HalfKeyword, 4), new Lexer().GetTokenKind("half", 0));
+            Assert.Equal((TokenKind.FloatKeyword, 5), new Lexer().GetTokenKind("float", 0));
+            Assert.Equal((TokenKind.DoubleKeyword, 6), new Lexer().GetTokenKind("double", 0));
+            Assert.Equal((TokenKind.BoolKeyword, 4), new Lexer().GetTokenKind("bool", 0));
+            Assert.Equal((TokenKind.CharKeyword, 4), new Lexer().GetTokenKind("char", 0));
+            Assert.Equal((TokenKind.StringKeyword, 6), new Lexer().GetTokenKind("string", 0));
+            Assert.Equal((TokenKind.ObjectKeyword, 5), new Lexer().GetTokenKind("object", 0));
+        }
+        #endregion
+
+        #region identifier test
+        [Fact(DisplayName = "GetIdentifierTest")]
+        public void GetIdentifierTest()
+        {
+            Assert.Equal((TokenKind.Identifier, 8), new Lexer().GetTokenKind("xxxx0123", 0));
+        }
+        #endregion
     }
 }

@@ -82,7 +82,22 @@ namespace Cecilia.Lib
                 }
             }
 
-
+            // identifier and keyword
+            if (char.IsLetter(targetChar))
+            {
+                IdentifierStr += targetChar;
+                nextPos++;
+                int i = 0;
+                for (i = nextPos; i < targetStr.Length; i++)
+                {
+                    if (!char.IsLetterOrDigit(targetStr[i]))
+                    {
+                        break;
+                    }
+                    IdentifierStr += targetStr[i];
+                }
+                return (JudgeKeywordOrIdentifier(IdentifierStr), i);
+            }
 
             return (TokenKind.Unknown, 0);
         }
@@ -228,6 +243,52 @@ namespace Cecilia.Lib
                     return (TokenKind.Slash, ++nextPos);
                 default:
                     return (TokenKind.Unknown, ++nextPos);
+            }
+        }
+
+        /// <summary>
+        /// その文字列がキーワードか識別子か区別する
+        /// </summary>
+        /// <param name="targetStr">String to be judge</param>
+        /// <returns></returns>
+        private TokenKind JudgeKeywordOrIdentifier(string targetStr)
+        {
+            switch (targetStr)
+            {
+                case "void":
+                    return TokenKind.VoidKeyword;
+                case "int8":
+                    return TokenKind.Int8Keyword;
+                case "int16":
+                    return TokenKind.Int16Keyword;
+                case "int32":
+                    return TokenKind.Int32Keyword;
+                case "int64":
+                    return TokenKind.Int64Keyword;
+                case "uint8":
+                    return TokenKind.UInt8Keyword;
+                case "uint16":
+                    return TokenKind.UInt16Keyword;
+                case "uint32":
+                    return TokenKind.UInt32Keyword;
+                case "uint64":
+                    return TokenKind.UInt64Keyword;
+                case "half":
+                    return TokenKind.HalfKeyword;
+                case "float":
+                    return TokenKind.FloatKeyword;
+                case "double":
+                    return TokenKind.DoubleKeyword;
+                case "bool":
+                    return TokenKind.BoolKeyword;
+                case "char":
+                    return TokenKind.CharKeyword;
+                case "string":
+                    return TokenKind.StringKeyword;
+                case "object":
+                    return TokenKind.ObjectKeyword;
+                default:
+                    return TokenKind.Identifier;
             }
         }
     }

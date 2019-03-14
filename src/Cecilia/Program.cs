@@ -20,7 +20,7 @@ namespace Cecilia
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(new Lexer().GetTokenKind("[", 0));
+            Console.WriteLine(new Lexer().GetTokenKind("void", 0));
         }
     }
 }
