@@ -287,6 +287,18 @@ namespace Cecilia.Lib
                     return TokenKind.StringKeyword;
                 case "object":
                     return TokenKind.ObjectKeyword;
+                case "namespace":
+                    return TokenKind.NamespaceKeyword;
+                case "public":
+                    return TokenKind.PublicKeyword;
+                case "private":
+                    return TokenKind.PrivateKeyword;
+                case "protected":
+                    return TokenKind.ProtectedKeyword;
+                case "internal":
+                    return TokenKind.InternalKeyword;
+                case "using":
+                    return TokenKind.UsingKeyword;
                 default:
                     return TokenKind.Identifier;
             }

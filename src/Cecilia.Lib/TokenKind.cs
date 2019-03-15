@@ -313,5 +313,32 @@ namespace Cecilia.Lib
         ObjectKeyword,
         #endregion
         #endregion
+
+        #region namespace and access modifier keywords
+        /// <summary>
+        /// namespace
+        /// </summary>
+        NamespaceKeyword,
+        /// <summary>
+        /// public
+        /// </summary>
+        PublicKeyword,
+        /// <summary>
+        /// private
+        /// </summary>
+        PrivateKeyword,
+        /// <summary>
+        /// protected
+        /// </summary>
+        ProtectedKeyword,
+        /// <summary>
+        /// internal
+        /// </summary>
+        InternalKeyword,
+        /// <summary>
+        /// using
+        /// </summary>
+        UsingKeyword,
+        #endregion
     }
 }

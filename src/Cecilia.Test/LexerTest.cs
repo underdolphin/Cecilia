@@ -112,7 +112,7 @@ namespace Cecilia.Test
             Assert.Equal((TokenKind.BoolKeyword, 4), new Lexer().GetTokenKind("bool", 0));
             Assert.Equal((TokenKind.CharKeyword, 4), new Lexer().GetTokenKind("char", 0));
             Assert.Equal((TokenKind.StringKeyword, 6), new Lexer().GetTokenKind("string", 0));
-            Assert.Equal((TokenKind.ObjectKeyword, 5), new Lexer().GetTokenKind("object", 0));
+            Assert.Equal((TokenKind.ObjectKeyword, 6), new Lexer().GetTokenKind("object", 0));
         }
         #endregion
 
@@ -121,6 +121,19 @@ namespace Cecilia.Test
         public void GetIdentifierTest()
         {
             Assert.Equal((TokenKind.Identifier, 8), new Lexer().GetTokenKind("xxxx0123", 0));
+        }
+        #endregion
+
+        #region namespace and access modifier keywords test
+        [Fact(DisplayName = "GetNamespaceAccessModifierTest")]
+        public void GetNamespaceAccessModifierTest()
+        {
+            Assert.Equal((TokenKind.NamespaceKeyword, 9), new Lexer().GetTokenKind("namespace", 0));
+            Assert.Equal((TokenKind.PublicKeyword, 6), new Lexer().GetTokenKind("public", 0));
+            Assert.Equal((TokenKind.PrivateKeyword, 7), new Lexer().GetTokenKind("private", 0));
+            Assert.Equal((TokenKind.ProtectedKeyword, 9), new Lexer().GetTokenKind("protected", 0));
+            Assert.Equal((TokenKind.InternalKeyword, 8), new Lexer().GetTokenKind("internal", 0));
+            Assert.Equal((TokenKind.UsingKeyword, 5), new Lexer().GetTokenKind("using", 0));
         }
         #endregion
     }
