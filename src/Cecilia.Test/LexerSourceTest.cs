@@ -18,8 +18,18 @@ namespace Cecilia.Test
 {
     public class LexerSourceTest
     {
+        [Fact(DisplayName = "EmptyTest1")]
+        public void EmptyTest1()
+        {
+            const string ceciliaSrc = "";
+            var lexer = new Lexer();
+            var result = lexer.GetNextTokenKind(ceciliaSrc);
+            Assert.Equal((TokenKind.EmptyRow, 0), result[0]);
+        }
+
         [Fact(DisplayName = "NamespaceTest1")]
-        public void NamespaceTest1() {
+        public void NamespaceTest1()
+        {
             const string ceciliaSrc = "namespace{}";
             var lexer = new Lexer();
             var result = lexer.GetNextTokenKind(ceciliaSrc);

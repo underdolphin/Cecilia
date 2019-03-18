@@ -39,6 +39,13 @@ namespace Cecilia.Lib
         public List<(TokenKind kind, int nextPos)> GetNextTokenKind(string targetStr)
         {
             var tokenList = new List<(TokenKind kind, int nextPos)>();
+            if (targetStr.Length == 0)
+            {
+                (TokenKind kind, int nextPos) ret = (TokenKind.EmptyRow, 0);
+                tokenList.Add(ret);
+                return tokenList;
+            }
+
             int getPos = 0;
             while (targetStr.Length > getPos)
             {

@@ -19,9 +19,11 @@ namespace Cecilia.Lib
         Unknown,
         #endregion
 
-        LexerEnd,
+        #region lexer state
+        EmptyRow,
         Whitespace,
         Identifier,
+        #endregion
 
         #region Single Charactor Punctuations
         /// <summary>
