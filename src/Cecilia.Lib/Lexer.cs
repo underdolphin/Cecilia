@@ -36,9 +36,17 @@ namespace Cecilia.Lib
             throw new NotImplementedException();
         }
 
-        public List<TokenKind> GetNextTokenKind(string targetStr)
+        public List<(TokenKind kind, int nextPos)> GetNextTokenKind(string targetStr)
         {
-            return null;
+            var tokenList = new List<(TokenKind kind, int nextPos)>();
+            int getPos = 0;
+            while (targetStr.Length > getPos)
+            {
+                var tokenInfo = GetTokenKind(targetStr, getPos);
+                tokenList.Add(tokenInfo);
+                getPos = tokenInfo.nextPos;
+            }
+            return tokenList;
         }
 
         public (TokenKind kind, int nextPos) GetTokenKind(string targetStr, int nextPos)

@@ -12,15 +12,21 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 using Cecilia.Lib;
-using System;
+using Xunit;
 
-namespace Cecilia
+namespace Cecilia.Test
 {
-    class Program
+    public class LexerSourceTest
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine(new Lexer().GetNextTokenKind("namespace {}"));
+        [Fact(DisplayName = "NamespaceTest1")]
+        public void NamespaceTest1() {
+            const string ceciliaSrc = "namespace{}";
+            var lexer = new Lexer();
+            var result = lexer.GetNextTokenKind(ceciliaSrc);
+            Assert.Equal(3, result.Count);
+            Assert.Equal((TokenKind.NamespaceKeyword, 9), result[0]);
+            Assert.Equal((TokenKind.LBrace, 10), result[1]);
+            Assert.Equal((TokenKind.RBrace, 11), result[2]);
         }
     }
 }
