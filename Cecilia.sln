@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28711.60
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cecilia", "src\Cecilia\Cecilia.csproj", "{8125E838-77C6-46FF-A178-14499BF5802B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cecilia", "src\Cecilia\Cecilia.csproj", "{8125E838-77C6-46FF-A178-14499BF5802B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cecilia.Lib", "src\Cecilia.Lib\Cecilia.Lib.csproj", "{5E4FA810-0855-4018-9F5C-E6CA27D224F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cecilia.Lib", "src\Cecilia.Lib\Cecilia.Lib.csproj", "{5E4FA810-0855-4018-9F5C-E6CA27D224F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cecilia.Test", "src\Cecilia.Test\Cecilia.Test.csproj", "{3BC263B5-0565-4C94-8CE3-D48EF261DB88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cecilia.Test", "src\Cecilia.Test\Cecilia.Test.csproj", "{3BC263B5-0565-4C94-8CE3-D48EF261DB88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
