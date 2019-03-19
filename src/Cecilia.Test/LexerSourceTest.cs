@@ -24,7 +24,7 @@ namespace Cecilia.Test
             const string ceciliaSrc = "";
             var lexer = new Lexer();
             var result = lexer.GetNextTokenKind(ceciliaSrc);
-            Assert.Equal((TokenKind.EmptyRow, 0), result[0]);
+            Assert.Equal((TokenKind.EmptyRow, 0, null), result[0]);
         }
 
         [Fact(DisplayName = "NamespaceTest1")]
@@ -34,9 +34,19 @@ namespace Cecilia.Test
             var lexer = new Lexer();
             var result = lexer.GetNextTokenKind(ceciliaSrc);
             Assert.Equal(3, result.Count);
-            Assert.Equal((TokenKind.NamespaceKeyword, 9), result[0]);
-            Assert.Equal((TokenKind.LBrace, 10), result[1]);
-            Assert.Equal((TokenKind.RBrace, 11), result[2]);
+            Assert.Equal((TokenKind.NamespaceKeyword, 9, null), result[0]);
+            Assert.Equal((TokenKind.LBrace, 10, null), result[1]);
+            Assert.Equal((TokenKind.RBrace, 11, null), result[2]);
+        }
+
+        [Fact(DisplayName = "IdentifierTest1")]
+        public void IdentifierTest1()
+        {
+            const string ceciliaSrc = "ID123456789";
+            var lexer = new Lexer();
+            var result = lexer.GetNextTokenKind(ceciliaSrc);
+            Assert.Single(result);
+            Assert.Equal((TokenKind.Identifier, 11, ceciliaSrc), result[0]);
         }
     }
 }

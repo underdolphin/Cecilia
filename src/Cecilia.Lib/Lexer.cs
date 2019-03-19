@@ -18,10 +18,10 @@ namespace Cecilia.Lib
 {
     public class Lexer
     {
-        public string IdentifierStr { get; set; }
-        public string Integer32Str { get; set; }
-        public string Integer64Str { get; set; }
-        public string IntegerFloatStr { get; set; }
+        string IdentifierStr { get; set; }
+        string Integer32Str { get; set; }
+        string Integer64Str { get; set; }
+        string IntegerFloatStr { get; set; }
         public string IntegerDoubleStr { get; set; }
 
         private LexerUtils Utils { get; set; }
@@ -36,12 +36,12 @@ namespace Cecilia.Lib
             throw new NotImplementedException();
         }
 
-        public List<(TokenKind kind, int nextPos)> GetNextTokenKind(string targetStr)
+        public List<(TokenKind kind, int nextPos, string tokenStr)> GetNextTokenKind(string targetStr)
         {
-            var tokenList = new List<(TokenKind kind, int nextPos)>();
+            var tokenList = new List<(TokenKind kind, int nextPos, string tokenStr)>();
             if (targetStr.Length == 0)
             {
-                (TokenKind kind, int nextPos) ret = (TokenKind.EmptyRow, 0);
+                (TokenKind kind, int nextPos, string tokenStr) ret = (TokenKind.EmptyRow, 0, null);
                 tokenList.Add(ret);
                 return tokenList;
             }
@@ -50,7 +50,17 @@ namespace Cecilia.Lib
             while (targetStr.Length > getPos)
             {
                 var tokenInfo = GetTokenKind(targetStr, getPos);
-                tokenList.Add(tokenInfo);
+                switch (tokenInfo.kind)
+                {
+                    case TokenKind.Identifier:
+                        (TokenKind kind, int nextPos, string tokenStr) idElement = (tokenInfo.kind, tokenInfo.nextPos, IdentifierStr);
+                        tokenList.Add(idElement);
+                        break;
+                    default:
+                        (TokenKind kind, int nextPos, string tokenStr) element = (tokenInfo.kind, tokenInfo.nextPos, null);
+                        tokenList.Add(element);
+                        break;
+                }
                 getPos = tokenInfo.nextPos;
             }
             return tokenList;
