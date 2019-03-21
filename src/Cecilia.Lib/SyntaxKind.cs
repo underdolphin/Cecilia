@@ -13,7 +13,7 @@
    limitations under the License. */
 namespace Cecilia.Lib
 {
-    public enum TokenKind
+    public enum SyntaxKind
     {
         #region Exception
         Unknown,

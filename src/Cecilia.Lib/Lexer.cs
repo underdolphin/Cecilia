@@ -33,17 +33,17 @@ namespace Cecilia.Lib
             Utils = new LexerUtils();
         }
 
-        public List<TokenKind> LexicalEngine(string targetStr)
+        public List<SyntaxKind> LexicalEngine(string targetStr)
         {
             throw new NotImplementedException();
         }
 
-        public List<(TokenKind kind, int nextPos, string tokenStr)> GetNextTokenKind(string targetStr)
+        public List<(SyntaxKind kind, int nextPos, string tokenStr)> GetNextTokenKind(string targetStr)
         {
-            var tokenList = new List<(TokenKind kind, int nextPos, string tokenStr)>();
+            var tokenList = new List<(SyntaxKind kind, int nextPos, string tokenStr)>();
             if (targetStr.Length == 0)
             {
-                (TokenKind kind, int nextPos, string tokenStr) ret = (TokenKind.EmptyRow, 0, null);
+                (SyntaxKind kind, int nextPos, string tokenStr) ret = (SyntaxKind.EmptyRow, 0, null);
                 tokenList.Add(ret);
                 return tokenList;
             }
@@ -54,12 +54,12 @@ namespace Cecilia.Lib
                 var tokenInfo = GetTokenKind(targetStr, getPos);
                 switch (tokenInfo.kind)
                 {
-                    case TokenKind.Identifier:
-                        (TokenKind kind, int nextPos, string tokenStr) idElement = (tokenInfo.kind, tokenInfo.nextPos, IdentifierStr);
+                    case SyntaxKind.Identifier:
+                        (SyntaxKind kind, int nextPos, string tokenStr) idElement = (tokenInfo.kind, tokenInfo.nextPos, IdentifierStr);
                         tokenList.Add(idElement);
                         break;
                     default:
-                        (TokenKind kind, int nextPos, string tokenStr) element = (tokenInfo.kind, tokenInfo.nextPos, null);
+                        (SyntaxKind kind, int nextPos, string tokenStr) element = (tokenInfo.kind, tokenInfo.nextPos, null);
                         tokenList.Add(element);
                         break;
                 }
@@ -74,13 +74,13 @@ namespace Cecilia.Lib
         /// <param name="targetStr">Cecilia source on read text line.</param>
         /// <param name="nextPos">Next analyzing position.</param>
         /// <returns></returns>
-        public (TokenKind kind, int nextPos) GetTokenKind(string targetStr, int nextPos)
+        public (SyntaxKind kind, int nextPos) GetTokenKind(string targetStr, int nextPos)
         {
             char targetChar = targetStr[nextPos];
             if (char.IsWhiteSpace(targetChar))
             {
                 // 読み取り対象位置の文字が空白だった場合、位置を一つ進め処理を終了
-                return (TokenKind.Whitespace, ++nextPos);
+                return (SyntaxKind.Whitespace, ++nextPos);
             }
 
             int nextPos2 = nextPos + 1; // １つ先読み用
@@ -94,14 +94,14 @@ namespace Cecilia.Lib
                     {
                         // 3文字記号演算子
                         var triplePuctuationResult = TriplePunctuationLexer(targetStr, nextPos);
-                        if (triplePuctuationResult.kind != TokenKind.Unknown)
+                        if (triplePuctuationResult.kind != SyntaxKind.Unknown)
                         {
                             return triplePuctuationResult;
                         }
                     }
                     // 2文字記号演算子
                     var doublePuctuationResult = DoublePunctuationLexer(targetStr, nextPos);
-                    if (doublePuctuationResult.kind != TokenKind.Unknown)
+                    if (doublePuctuationResult.kind != SyntaxKind.Unknown)
                     {
                         return doublePuctuationResult;
                     }
@@ -109,7 +109,7 @@ namespace Cecilia.Lib
 
                 // 1文字記号演算子
                 var singlePuctuationResult = SinglePunctuationLexer(targetChar, nextPos);
-                if (singlePuctuationResult.kind != TokenKind.Unknown)
+                if (singlePuctuationResult.kind != SyntaxKind.Unknown)
                 {
                     return singlePuctuationResult;
                 }
@@ -149,10 +149,10 @@ namespace Cecilia.Lib
                 return (JudgeKeywordOrIdentifier(IdentifierStr), i);
             }
 
-            return (TokenKind.Unknown, 0);
+            return (SyntaxKind.Unknown, 0);
         }
 
-        private (TokenKind kind, int nextPos) DoublePunctuationLexer(string targetStr, int nextPos)
+        private (SyntaxKind kind, int nextPos) DoublePunctuationLexer(string targetStr, int nextPos)
         {
             /* 対象の文字列が2文字でトークンを構成する場合、
              * すぐに種類を判定し、位置を2つ進め処理を終了
@@ -160,53 +160,53 @@ namespace Cecilia.Lib
             switch (targetStr)
             {
                 case "//":
-                    return (TokenKind.SingleLineComment, nextPos += 2);
+                    return (SyntaxKind.SingleLineComment, nextPos += 2);
                 case "/*":
-                    return (TokenKind.MultiLineCommentStart, nextPos += 2);
+                    return (SyntaxKind.MultiLineCommentStart, nextPos += 2);
                 case "*/":
-                    return (TokenKind.MultiLineCommentEnd, nextPos += 2);
+                    return (SyntaxKind.MultiLineCommentEnd, nextPos += 2);
                 case "||":
-                    return (TokenKind.BarBar, nextPos += 2);
+                    return (SyntaxKind.BarBar, nextPos += 2);
                 case "&&":
-                    return (TokenKind.AmpAmp, nextPos += 2);
+                    return (SyntaxKind.AmpAmp, nextPos += 2);
                 case "--":
-                    return (TokenKind.MinusMinus, nextPos += 2);
+                    return (SyntaxKind.MinusMinus, nextPos += 2);
                 case "++":
-                    return (TokenKind.PlusPlus, nextPos += 2);
+                    return (SyntaxKind.PlusPlus, nextPos += 2);
                 case "??":
-                    return (TokenKind.QuestionQuestion, nextPos += 2);
+                    return (SyntaxKind.QuestionQuestion, nextPos += 2);
                 case "==":
-                    return (TokenKind.EqualsEquals, nextPos += 2);
+                    return (SyntaxKind.EqualsEquals, nextPos += 2);
                 case "!=":
-                    return (TokenKind.ExclamationEquals, nextPos += 2);
+                    return (SyntaxKind.ExclamationEquals, nextPos += 2);
                 case "=>":
-                    return (TokenKind.Arrow, nextPos += 2);
+                    return (SyntaxKind.Arrow, nextPos += 2);
                 case "<=":
-                    return (TokenKind.LessThanEqual, nextPos += 2);
+                    return (SyntaxKind.LessThanEqual, nextPos += 2);
                 case ">=":
-                    return (TokenKind.GreaterThanEqual, nextPos += 2);
+                    return (SyntaxKind.GreaterThanEqual, nextPos += 2);
                 case "<<":
-                    return (TokenKind.LessThanLessThan, nextPos += 2);
+                    return (SyntaxKind.LessThanLessThan, nextPos += 2);
                 case ">>":
-                    return (TokenKind.GreaterThanGreaterThan, nextPos += 2);
+                    return (SyntaxKind.GreaterThanGreaterThan, nextPos += 2);
                 case "+=":
-                    return (TokenKind.PlusEqual, nextPos += 2);
+                    return (SyntaxKind.PlusEqual, nextPos += 2);
                 case "-=":
-                    return (TokenKind.MinusEqual, nextPos += 2);
+                    return (SyntaxKind.MinusEqual, nextPos += 2);
                 case "*=":
-                    return (TokenKind.AsteriskEqual, nextPos += 2);
+                    return (SyntaxKind.AsteriskEqual, nextPos += 2);
                 case "/=":
-                    return (TokenKind.SlashEqual, nextPos += 2);
+                    return (SyntaxKind.SlashEqual, nextPos += 2);
                 case "|=":
-                    return (TokenKind.BarEqual, nextPos += 2);
+                    return (SyntaxKind.BarEqual, nextPos += 2);
                 case "^=":
-                    return (TokenKind.CaretEqual, nextPos += 2);
+                    return (SyntaxKind.CaretEqual, nextPos += 2);
                 default:
-                    return (TokenKind.Unknown, nextPos += 2);
+                    return (SyntaxKind.Unknown, nextPos += 2);
             }
         }
 
-        private (TokenKind kind, int nextPos) TriplePunctuationLexer(string targetStr, int nextPos)
+        private (SyntaxKind kind, int nextPos) TriplePunctuationLexer(string targetStr, int nextPos)
         {
             /* 対象の文字列が3文字でトークンを構成する場合、
              * すぐに種類を判定し、位置を3つ進め処理を終了
@@ -214,11 +214,11 @@ namespace Cecilia.Lib
             switch (targetStr)
             {
                 case "<<=":
-                    return (TokenKind.LessThanLessThanEqual, nextPos += 3);
+                    return (SyntaxKind.LessThanLessThanEqual, nextPos += 3);
                 case ">>=":
-                    return (TokenKind.GreaterThanGreaterThanEqual, nextPos += 3);
+                    return (SyntaxKind.GreaterThanGreaterThanEqual, nextPos += 3);
                 default:
-                    return (TokenKind.Unknown, nextPos += 3);
+                    return (SyntaxKind.Unknown, nextPos += 3);
             }
         }
 
@@ -228,7 +228,7 @@ namespace Cecilia.Lib
         /// <param name="targetChar"></param>
         /// <param name="nextPos"></param>
         /// <returns></returns>
-        private (TokenKind kind, int nextPos) SinglePunctuationLexer(char targetChar, int nextPos)
+        private (SyntaxKind kind, int nextPos) SinglePunctuationLexer(char targetChar, int nextPos)
         {
             /* 対象の文字列が1文字でトークンを構成する場合、
              * すぐに種類を判定し、位置を一つ進め処理を終了
@@ -236,63 +236,63 @@ namespace Cecilia.Lib
             switch (targetChar)
             {
                 case '(':
-                    return (TokenKind.LParen, ++nextPos);
+                    return (SyntaxKind.LParen, ++nextPos);
                 case ')':
-                    return (TokenKind.RParen, ++nextPos);
+                    return (SyntaxKind.RParen, ++nextPos);
                 case '{':
-                    return (TokenKind.LBrace, ++nextPos);
+                    return (SyntaxKind.LBrace, ++nextPos);
                 case '}':
-                    return (TokenKind.RBrace, ++nextPos);
+                    return (SyntaxKind.RBrace, ++nextPos);
                 case '[':
-                    return (TokenKind.LBracket, ++nextPos);
+                    return (SyntaxKind.LBracket, ++nextPos);
                 case ']':
-                    return (TokenKind.RBracket, ++nextPos);
+                    return (SyntaxKind.RBracket, ++nextPos);
                 case '!':
-                    return (TokenKind.Exclamation, ++nextPos);
+                    return (SyntaxKind.Exclamation, ++nextPos);
                 case '$':
-                    return (TokenKind.Dollar, ++nextPos);
+                    return (SyntaxKind.Dollar, ++nextPos);
                 case '%':
-                    return (TokenKind.Parcent, ++nextPos);
+                    return (SyntaxKind.Parcent, ++nextPos);
                 case '^':
-                    return (TokenKind.Caret, ++nextPos);
+                    return (SyntaxKind.Caret, ++nextPos);
                 case '&':
-                    return (TokenKind.Ampersand, ++nextPos);
+                    return (SyntaxKind.Ampersand, ++nextPos);
                 case '*':
-                    return (TokenKind.Asterisk, ++nextPos);
+                    return (SyntaxKind.Asterisk, ++nextPos);
                 case '-':
-                    return (TokenKind.Minus, ++nextPos);
+                    return (SyntaxKind.Minus, ++nextPos);
                 case '+':
-                    return (TokenKind.Plus, ++nextPos);
+                    return (SyntaxKind.Plus, ++nextPos);
                 case '=':
-                    return (TokenKind.Equals, ++nextPos);
+                    return (SyntaxKind.Equals, ++nextPos);
                 case '|':
-                    return (TokenKind.Bar, ++nextPos);
+                    return (SyntaxKind.Bar, ++nextPos);
                 case '\\':
-                    return (TokenKind.Backslash, ++nextPos);
+                    return (SyntaxKind.Backslash, ++nextPos);
                 case ':':
-                    return (TokenKind.Colon, ++nextPos);
+                    return (SyntaxKind.Colon, ++nextPos);
                 case ';':
-                    return (TokenKind.SemiColon, ++nextPos);
+                    return (SyntaxKind.SemiColon, ++nextPos);
                 case '\"':
-                    return (TokenKind.DoubleQuote, ++nextPos);
+                    return (SyntaxKind.DoubleQuote, ++nextPos);
                 case '\'':
-                    return (TokenKind.SingleQuote, ++nextPos);
+                    return (SyntaxKind.SingleQuote, ++nextPos);
                 case '<':
-                    return (TokenKind.LessThan, ++nextPos);
+                    return (SyntaxKind.LessThan, ++nextPos);
                 case '>':
-                    return (TokenKind.GreaterThan, ++nextPos);
+                    return (SyntaxKind.GreaterThan, ++nextPos);
                 case ',':
-                    return (TokenKind.Comma, ++nextPos);
+                    return (SyntaxKind.Comma, ++nextPos);
                 case '.':
-                    return (TokenKind.Dot, ++nextPos);
+                    return (SyntaxKind.Dot, ++nextPos);
                 case '?':
-                    return (TokenKind.Question, ++nextPos);
+                    return (SyntaxKind.Question, ++nextPos);
                 case '#':
-                    return (TokenKind.Hash, ++nextPos);
+                    return (SyntaxKind.Hash, ++nextPos);
                 case '/':
-                    return (TokenKind.Slash, ++nextPos);
+                    return (SyntaxKind.Slash, ++nextPos);
                 default:
-                    return (TokenKind.Unknown, ++nextPos);
+                    return (SyntaxKind.Unknown, ++nextPos);
             }
         }
 
@@ -301,56 +301,56 @@ namespace Cecilia.Lib
         /// </summary>
         /// <param name="targetStr">String to be judge</param>
         /// <returns></returns>
-        private TokenKind JudgeKeywordOrIdentifier(string targetStr)
+        private SyntaxKind JudgeKeywordOrIdentifier(string targetStr)
         {
             switch (targetStr)
             {
                 case "void":
-                    return TokenKind.VoidKeyword;
+                    return SyntaxKind.VoidKeyword;
                 case "int8":
-                    return TokenKind.Int8Keyword;
+                    return SyntaxKind.Int8Keyword;
                 case "int16":
-                    return TokenKind.Int16Keyword;
+                    return SyntaxKind.Int16Keyword;
                 case "int32":
-                    return TokenKind.Int32Keyword;
+                    return SyntaxKind.Int32Keyword;
                 case "int64":
-                    return TokenKind.Int64Keyword;
+                    return SyntaxKind.Int64Keyword;
                 case "uint8":
-                    return TokenKind.UInt8Keyword;
+                    return SyntaxKind.UInt8Keyword;
                 case "uint16":
-                    return TokenKind.UInt16Keyword;
+                    return SyntaxKind.UInt16Keyword;
                 case "uint32":
-                    return TokenKind.UInt32Keyword;
+                    return SyntaxKind.UInt32Keyword;
                 case "uint64":
-                    return TokenKind.UInt64Keyword;
+                    return SyntaxKind.UInt64Keyword;
                 case "half":
-                    return TokenKind.HalfKeyword;
+                    return SyntaxKind.HalfKeyword;
                 case "float":
-                    return TokenKind.FloatKeyword;
+                    return SyntaxKind.FloatKeyword;
                 case "double":
-                    return TokenKind.DoubleKeyword;
+                    return SyntaxKind.DoubleKeyword;
                 case "bool":
-                    return TokenKind.BoolKeyword;
+                    return SyntaxKind.BoolKeyword;
                 case "char":
-                    return TokenKind.CharKeyword;
+                    return SyntaxKind.CharKeyword;
                 case "string":
-                    return TokenKind.StringKeyword;
+                    return SyntaxKind.StringKeyword;
                 case "object":
-                    return TokenKind.ObjectKeyword;
+                    return SyntaxKind.ObjectKeyword;
                 case "namespace":
-                    return TokenKind.NamespaceKeyword;
+                    return SyntaxKind.NamespaceKeyword;
                 case "public":
-                    return TokenKind.PublicKeyword;
+                    return SyntaxKind.PublicKeyword;
                 case "private":
-                    return TokenKind.PrivateKeyword;
+                    return SyntaxKind.PrivateKeyword;
                 case "protected":
-                    return TokenKind.ProtectedKeyword;
+                    return SyntaxKind.ProtectedKeyword;
                 case "internal":
-                    return TokenKind.InternalKeyword;
+                    return SyntaxKind.InternalKeyword;
                 case "using":
-                    return TokenKind.UsingKeyword;
+                    return SyntaxKind.UsingKeyword;
                 default:
-                    return TokenKind.Identifier;
+                    return SyntaxKind.Identifier;
             }
         }
 
@@ -359,17 +359,17 @@ namespace Cecilia.Lib
         /// </summary>
         /// <param name="targetStr">String to be judge</param>
         /// <returns></returns>
-        private TokenKind JudgeIntegerOrFloating(string targetStr)
+        private SyntaxKind JudgeIntegerOrFloating(string targetStr)
         {
             int dotCount = targetStr.Where(c => c == '.').Count();
             switch (dotCount)
             {
                 case 1:
-                    return TokenKind.FloatingLiteral;
+                    return SyntaxKind.FloatingLiteral;
                 case 0:
-                    return TokenKind.IntegerLiteral;
+                    return SyntaxKind.IntegerLiteral;
                 default:
-                    return TokenKind.Unknown;
+                    return SyntaxKind.Unknown;
             }
         }
     }
