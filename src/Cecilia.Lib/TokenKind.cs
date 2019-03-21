@@ -25,6 +25,11 @@ namespace Cecilia.Lib
         Identifier,
         #endregion
 
+        #region number
+        IntegerLiteral,
+        FloatingLiteral,
+        #endregion
+
         #region Single Charactor Punctuations
         /// <summary>
         /// (

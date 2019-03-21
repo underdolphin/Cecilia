@@ -13,21 +13,23 @@
    limitations under the License. */
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Cecilia.Lib
 {
     public class Lexer
     {
         string IdentifierStr { get; set; }
-        string Integer32Str { get; set; }
-        string Integer64Str { get; set; }
-        string IntegerFloatStr { get; set; }
-        public string IntegerDoubleStr { get; set; }
+        string IntegerStr { get; set; }
+        string FloatingStr { get; set; }
 
         private LexerUtils Utils { get; set; }
 
         public Lexer()
         {
+            IdentifierStr = "";
+            IntegerStr = "";
+            FloatingStr = "";
             Utils = new LexerUtils();
         }
 
@@ -66,6 +68,12 @@ namespace Cecilia.Lib
             return tokenList;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="targetStr">Cecilia source on read text line.</param>
+        /// <param name="nextPos">Next analyzing position.</param>
+        /// <returns></returns>
         public (TokenKind kind, int nextPos) GetTokenKind(string targetStr, int nextPos)
         {
             char targetChar = targetStr[nextPos];
@@ -107,12 +115,29 @@ namespace Cecilia.Lib
                 }
             }
 
+            // number
+            if (char.IsDigit(targetChar) || targetChar == '.')
+            {
+                IntegerStr += targetChar;
+                nextPos++;
+                int i;
+                for (i = nextPos; i < targetStr.Length; i++)
+                {
+                    if (!char.IsDigit(targetStr[i]) && targetStr[i] != '.')
+                    {
+                        break;
+                    }
+                    IntegerStr += targetStr[i];
+                }
+                return (JudgeIntegerOrFloating(IntegerStr), i);
+            }
+
             // identifier and keyword
             if (char.IsLetter(targetChar))
             {
                 IdentifierStr += targetChar;
                 nextPos++;
-                int i = 0;
+                int i;
                 for (i = nextPos; i < targetStr.Length; i++)
                 {
                     if (!char.IsLetterOrDigit(targetStr[i]))
@@ -326,6 +351,25 @@ namespace Cecilia.Lib
                     return TokenKind.UsingKeyword;
                 default:
                     return TokenKind.Identifier;
+            }
+        }
+
+        /// <summary>
+        /// その文字列が整数か小数区別する
+        /// </summary>
+        /// <param name="targetStr">String to be judge</param>
+        /// <returns></returns>
+        private TokenKind JudgeIntegerOrFloating(string targetStr)
+        {
+            int dotCount = targetStr.Where(c => c == '.').Count();
+            switch (dotCount)
+            {
+                case 1:
+                    return TokenKind.FloatingLiteral;
+                case 0:
+                    return TokenKind.IntegerLiteral;
+                default:
+                    return TokenKind.Unknown;
             }
         }
     }

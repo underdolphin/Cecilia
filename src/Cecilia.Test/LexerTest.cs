@@ -124,6 +124,16 @@ namespace Cecilia.Test
         }
         #endregion
 
+        #region number test
+        [Fact(DisplayName = "GetNumberTest")]
+        public void GetNumberTest()
+        {
+            Assert.Equal((TokenKind.IntegerLiteral, 3), new Lexer().GetTokenKind("123", 0));
+            Assert.Equal((TokenKind.FloatingLiteral, 7), new Lexer().GetTokenKind("123.456", 0));
+            Assert.Equal((TokenKind.Unknown, 7), new Lexer().GetTokenKind("12.3.45", 0));
+        }
+        #endregion
+
         #region namespace and access modifier keywords test
         [Fact(DisplayName = "GetNamespaceAccessModifierTest")]
         public void GetNamespaceAccessModifierTest()
