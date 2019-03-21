@@ -347,5 +347,13 @@ namespace Cecilia.Lib
         /// </summary>
         UsingKeyword,
         #endregion
+
+        #region flow and definition keywords 
+        VarKeyword,
+        ConstKeyword,
+        SwitchKeyword,
+        LoopKeyword,
+        MacroKeyword,
+        #endregion
     }
 }

@@ -146,5 +146,17 @@ namespace Cecilia.Test
             Assert.Equal((SyntaxKind.UsingKeyword, 5), new Lexer().GetTokenKind("using", 0));
         }
         #endregion
+
+        #region flow and definition keywords test
+        [Fact(DisplayName = "GetFlowAndDefinitionTest")]
+        public void GetFlowAndDefinitionTest()
+        {
+            Assert.Equal((SyntaxKind.VarKeyword, 3), new Lexer().GetTokenKind("var", 0));
+            Assert.Equal((SyntaxKind.ConstKeyword, 5), new Lexer().GetTokenKind("const", 0));
+            Assert.Equal((SyntaxKind.SwitchKeyword, 6), new Lexer().GetTokenKind("switch", 0));
+            Assert.Equal((SyntaxKind.LoopKeyword, 4), new Lexer().GetTokenKind("loop", 0));
+            Assert.Equal((SyntaxKind.MacroKeyword, 5), new Lexer().GetTokenKind("macro", 0));
+        }
+        #endregion 
     }
 }

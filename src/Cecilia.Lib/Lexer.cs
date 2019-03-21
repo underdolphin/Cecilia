@@ -349,6 +349,16 @@ namespace Cecilia.Lib
                     return SyntaxKind.InternalKeyword;
                 case "using":
                     return SyntaxKind.UsingKeyword;
+                case "var":
+                    return SyntaxKind.VarKeyword;
+                case "const":
+                    return SyntaxKind.ConstKeyword;
+                case "switch":
+                    return SyntaxKind.SwitchKeyword;
+                case "loop":
+                    return SyntaxKind.LoopKeyword;
+                case "macro":
+                    return SyntaxKind.MacroKeyword;
                 default:
                     return SyntaxKind.Identifier;
             }
