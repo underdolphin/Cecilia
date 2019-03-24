@@ -20,7 +20,8 @@ namespace Cecilia
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(new Lexer().GetNextTokenKind("namespace {}"));
+            var result = new Lexer().GetNextTokenKind("public var publicFunction = () => {}");
+            Console.WriteLine(result[15]);
         }
     }
 }

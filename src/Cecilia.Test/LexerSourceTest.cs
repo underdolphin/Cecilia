@@ -39,6 +39,30 @@ namespace Cecilia.Test
             Assert.Equal((SyntaxKind.RBrace, 11, null), result[2]);
         }
 
+        [Fact(DisplayName = "PublicAccessTest1")]
+        public void PublicAccessTest1()
+        {
+            const string ceciliaSrc = "public var publicFunction = () => {}";
+            var lexer = new Lexer();
+            var result = lexer.GetNextTokenKind(ceciliaSrc);
+            Assert.Equal(15, result.Count);
+            Assert.Equal(SyntaxKind.PublicKeyword, result[0].kind);
+            Assert.Equal(SyntaxKind.Whitespace, result[1].kind);
+            Assert.Equal(SyntaxKind.VarKeyword, result[2].kind);
+            Assert.Equal(SyntaxKind.Whitespace, result[3].kind);
+            Assert.Equal(SyntaxKind.Identifier, result[4].kind);
+            Assert.Equal(SyntaxKind.Whitespace, result[5].kind);
+            Assert.Equal(SyntaxKind.Equals, result[6].kind);
+            Assert.Equal(SyntaxKind.Whitespace, result[7].kind);
+            Assert.Equal(SyntaxKind.LParen, result[8].kind);
+            Assert.Equal(SyntaxKind.RParen, result[9].kind);
+            Assert.Equal(SyntaxKind.Whitespace, result[10].kind);
+            Assert.Equal(SyntaxKind.Arrow, result[11].kind);
+            Assert.Equal(SyntaxKind.Whitespace, result[12].kind);
+            Assert.Equal(SyntaxKind.LBrace, result[13].kind);
+            Assert.Equal(SyntaxKind.RBrace, result[14].kind);
+        }
+
         [Fact(DisplayName = "IdentifierTest1")]
         public void IdentifierTest1()
         {

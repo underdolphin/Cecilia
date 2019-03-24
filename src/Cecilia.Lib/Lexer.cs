@@ -19,7 +19,6 @@ namespace Cecilia.Lib
 {
     public class Lexer
     {
-        string IdentifierStr { get; set; }
         string IntegerStr { get; set; }
         string FloatingStr { get; set; }
 
@@ -27,7 +26,6 @@ namespace Cecilia.Lib
 
         public Lexer()
         {
-            IdentifierStr = "";
             IntegerStr = "";
             FloatingStr = "";
             Utils = new LexerUtils();
@@ -52,17 +50,7 @@ namespace Cecilia.Lib
             while (targetStr.Length > getPos)
             {
                 var tokenInfo = GetTokenKind(targetStr, getPos);
-                switch (tokenInfo.kind)
-                {
-                    case SyntaxKind.Identifier:
-                        (SyntaxKind kind, int nextPos, string tokenStr) idElement = (tokenInfo.kind, tokenInfo.nextPos, IdentifierStr);
-                        tokenList.Add(idElement);
-                        break;
-                    default:
-                        (SyntaxKind kind, int nextPos, string tokenStr) element = (tokenInfo.kind, tokenInfo.nextPos, null);
-                        tokenList.Add(element);
-                        break;
-                }
+                tokenList.Add(tokenInfo);
                 getPos = tokenInfo.nextPos;
             }
             return tokenList;
@@ -74,13 +62,13 @@ namespace Cecilia.Lib
         /// <param name="targetStr">Cecilia source on read text line.</param>
         /// <param name="nextPos">Next analyzing position.</param>
         /// <returns></returns>
-        public (SyntaxKind kind, int nextPos) GetTokenKind(string targetStr, int nextPos)
+        public (SyntaxKind kind, int nextPos, string tokenStr) GetTokenKind(string targetStr, int nextPos)
         {
             char targetChar = targetStr[nextPos];
             if (char.IsWhiteSpace(targetChar))
             {
                 // 読み取り対象位置の文字が空白だった場合、位置を一つ進め処理を終了
-                return (SyntaxKind.Whitespace, ++nextPos);
+                return (SyntaxKind.Whitespace, ++nextPos, null);
             }
 
             int nextPos2 = nextPos + 1; // １つ先読み用
@@ -93,17 +81,17 @@ namespace Cecilia.Lib
                     if (targetStr.Length > nextPos3 && Utils.IsSyntaxPunctuation(targetStr[nextPos3]))
                     {
                         // 3文字記号演算子
-                        var triplePuctuationResult = TriplePunctuationLexer(targetStr, nextPos);
+                        var triplePuctuationResult = TriplePunctuationLexer(targetStr.Substring(nextPos, 3), nextPos);
                         if (triplePuctuationResult.kind != SyntaxKind.Unknown)
                         {
-                            return triplePuctuationResult;
+                            return (triplePuctuationResult.kind, triplePuctuationResult.nextPos, null);
                         }
                     }
                     // 2文字記号演算子
-                    var doublePuctuationResult = DoublePunctuationLexer(targetStr, nextPos);
+                    var doublePuctuationResult = DoublePunctuationLexer(targetStr.Substring(nextPos, 2), nextPos);
                     if (doublePuctuationResult.kind != SyntaxKind.Unknown)
                     {
-                        return doublePuctuationResult;
+                        return (doublePuctuationResult.kind, doublePuctuationResult.nextPos, null);
                     }
                 }
 
@@ -111,7 +99,7 @@ namespace Cecilia.Lib
                 var singlePuctuationResult = SinglePunctuationLexer(targetChar, nextPos);
                 if (singlePuctuationResult.kind != SyntaxKind.Unknown)
                 {
-                    return singlePuctuationResult;
+                    return (singlePuctuationResult.kind, singlePuctuationResult.nextPos, null);
                 }
             }
 
@@ -129,9 +117,11 @@ namespace Cecilia.Lib
                     }
                     IntegerStr += targetStr[i];
                 }
-                return (JudgeIntegerOrFloating(IntegerStr), i);
+                var judge = (JudgeIntegerOrFloating(IntegerStr));
+                return (judge.kind, i, judge.numberStr);
             }
 
+            var IdentifierStr = "";
             // identifier and keyword
             if (char.IsLetter(targetChar))
             {
@@ -146,10 +136,11 @@ namespace Cecilia.Lib
                     }
                     IdentifierStr += targetStr[i];
                 }
-                return (JudgeKeywordOrIdentifier(IdentifierStr), i);
+                var judge = JudgeKeywordOrIdentifier(IdentifierStr);
+                return (judge.kind, i, judge.idStr);
             }
 
-            return (SyntaxKind.Unknown, 0);
+            return (SyntaxKind.Unknown, 0, null);
         }
 
         private (SyntaxKind kind, int nextPos) DoublePunctuationLexer(string targetStr, int nextPos)
@@ -301,66 +292,66 @@ namespace Cecilia.Lib
         /// </summary>
         /// <param name="targetStr">String to be judge</param>
         /// <returns></returns>
-        private SyntaxKind JudgeKeywordOrIdentifier(string targetStr)
+        private (SyntaxKind kind, string idStr) JudgeKeywordOrIdentifier(string targetStr)
         {
             switch (targetStr)
             {
                 case "void":
-                    return SyntaxKind.VoidKeyword;
+                    return (SyntaxKind.VoidKeyword, null);
                 case "int8":
-                    return SyntaxKind.Int8Keyword;
+                    return (SyntaxKind.Int8Keyword, null);
                 case "int16":
-                    return SyntaxKind.Int16Keyword;
+                    return (SyntaxKind.Int16Keyword, null);
                 case "int32":
-                    return SyntaxKind.Int32Keyword;
+                    return (SyntaxKind.Int32Keyword, null);
                 case "int64":
-                    return SyntaxKind.Int64Keyword;
+                    return (SyntaxKind.Int64Keyword, null);
                 case "uint8":
-                    return SyntaxKind.UInt8Keyword;
+                    return (SyntaxKind.UInt8Keyword, null);
                 case "uint16":
-                    return SyntaxKind.UInt16Keyword;
+                    return (SyntaxKind.UInt16Keyword, null);
                 case "uint32":
-                    return SyntaxKind.UInt32Keyword;
+                    return (SyntaxKind.UInt32Keyword, null);
                 case "uint64":
-                    return SyntaxKind.UInt64Keyword;
+                    return (SyntaxKind.UInt64Keyword, null);
                 case "half":
-                    return SyntaxKind.HalfKeyword;
+                    return (SyntaxKind.HalfKeyword, null);
                 case "float":
-                    return SyntaxKind.FloatKeyword;
+                    return (SyntaxKind.FloatKeyword, null);
                 case "double":
-                    return SyntaxKind.DoubleKeyword;
+                    return (SyntaxKind.DoubleKeyword, null);
                 case "bool":
-                    return SyntaxKind.BoolKeyword;
+                    return (SyntaxKind.BoolKeyword, null);
                 case "char":
-                    return SyntaxKind.CharKeyword;
+                    return (SyntaxKind.CharKeyword, null);
                 case "string":
-                    return SyntaxKind.StringKeyword;
+                    return (SyntaxKind.StringKeyword, null);
                 case "object":
-                    return SyntaxKind.ObjectKeyword;
+                    return (SyntaxKind.ObjectKeyword, null);
                 case "namespace":
-                    return SyntaxKind.NamespaceKeyword;
+                    return (SyntaxKind.NamespaceKeyword, null);
                 case "public":
-                    return SyntaxKind.PublicKeyword;
+                    return (SyntaxKind.PublicKeyword, null);
                 case "private":
-                    return SyntaxKind.PrivateKeyword;
+                    return (SyntaxKind.PrivateKeyword, null);
                 case "protected":
-                    return SyntaxKind.ProtectedKeyword;
+                    return (SyntaxKind.ProtectedKeyword, null);
                 case "internal":
-                    return SyntaxKind.InternalKeyword;
+                    return (SyntaxKind.InternalKeyword, null);
                 case "using":
-                    return SyntaxKind.UsingKeyword;
+                    return (SyntaxKind.UsingKeyword, null);
                 case "var":
-                    return SyntaxKind.VarKeyword;
+                    return (SyntaxKind.VarKeyword, null);
                 case "const":
-                    return SyntaxKind.ConstKeyword;
+                    return (SyntaxKind.ConstKeyword, null);
                 case "switch":
-                    return SyntaxKind.SwitchKeyword;
+                    return (SyntaxKind.SwitchKeyword, null);
                 case "loop":
-                    return SyntaxKind.LoopKeyword;
+                    return (SyntaxKind.LoopKeyword, null);
                 case "macro":
-                    return SyntaxKind.MacroKeyword;
+                    return (SyntaxKind.MacroKeyword, null);
                 default:
-                    return SyntaxKind.Identifier;
+                    return (SyntaxKind.Identifier, targetStr);
             }
         }
 
@@ -369,17 +360,17 @@ namespace Cecilia.Lib
         /// </summary>
         /// <param name="targetStr">String to be judge</param>
         /// <returns></returns>
-        private SyntaxKind JudgeIntegerOrFloating(string targetStr)
+        private (SyntaxKind kind, string numberStr) JudgeIntegerOrFloating(string targetStr)
         {
             int dotCount = targetStr.Where(c => c == '.').Count();
             switch (dotCount)
             {
                 case 1:
-                    return SyntaxKind.FloatingLiteral;
+                    return (SyntaxKind.FloatingLiteral, targetStr);
                 case 0:
-                    return SyntaxKind.IntegerLiteral;
+                    return (SyntaxKind.IntegerLiteral, targetStr);
                 default:
-                    return SyntaxKind.Unknown;
+                    return (SyntaxKind.Unknown, null);
             }
         }
     }
