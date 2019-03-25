@@ -15,7 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Cecilia.Lib
+namespace Cecilia.Lib.Analyzer
 {
     public class Lexer
     {
