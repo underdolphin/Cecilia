@@ -63,6 +63,24 @@ namespace Cecilia.Test
             Assert.Equal(SyntaxKind.RBrace, result[14].kind);
         }
 
+        [Fact(DisplayName = "NumberLiteralTest1")]
+        public void NumberLiteralTest1()
+        {
+            const string ceciliaSrc = "var num = 123.456";
+            var lexer = new Lexer();
+            var result = lexer.GetNextTokenKind(ceciliaSrc);
+            Assert.Equal(7, result.Count);
+            Assert.Equal(SyntaxKind.VarKeyword, result[0].kind);
+            Assert.Equal(SyntaxKind.Whitespace, result[1].kind);
+            Assert.Equal(SyntaxKind.Identifier, result[2].kind);
+            Assert.Equal(SyntaxKind.Whitespace, result[3].kind);
+            Assert.Equal(SyntaxKind.Equals, result[4].kind);
+            Assert.Equal(SyntaxKind.Whitespace, result[5].kind);
+            Assert.Equal(SyntaxKind.FloatingLiteral, result[6].kind);
+            Assert.Equal("123.456", result[6].tokenStr);
+        }
+
+
         [Fact(DisplayName = "IdentifierTest1")]
         public void IdentifierTest1()
         {

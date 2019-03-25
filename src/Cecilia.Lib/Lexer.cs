@@ -19,15 +19,10 @@ namespace Cecilia.Lib
 {
     public class Lexer
     {
-        string IntegerStr { get; set; }
-        string FloatingStr { get; set; }
-
         private LexerUtils Utils { get; set; }
 
         public Lexer()
         {
-            IntegerStr = "";
-            FloatingStr = "";
             Utils = new LexerUtils();
         }
 
@@ -103,6 +98,7 @@ namespace Cecilia.Lib
                 }
             }
 
+            var IntegerStr = "";
             // number
             if (char.IsDigit(targetChar) || targetChar == '.')
             {
