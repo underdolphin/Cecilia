@@ -23,7 +23,7 @@ namespace Cecilia.Test.AnalyzerTest
         {
             const string ceciliaSrc = "";
             var lexer = new Lexer();
-            var result = lexer.GetNextTokenKind(ceciliaSrc);
+            var result = lexer.GetTokenList(ceciliaSrc);
             Assert.Equal((SyntaxKind.EmptyRow, 0, null), result[0]);
         }
 
@@ -32,7 +32,7 @@ namespace Cecilia.Test.AnalyzerTest
         {
             const string ceciliaSrc = "namespace{}";
             var lexer = new Lexer();
-            var result = lexer.GetNextTokenKind(ceciliaSrc);
+            var result = lexer.GetTokenList(ceciliaSrc);
             Assert.Equal(3, result.Count);
             Assert.Equal((SyntaxKind.NamespaceKeyword, 9, null), result[0]);
             Assert.Equal((SyntaxKind.LBrace, 10, null), result[1]);
@@ -44,7 +44,7 @@ namespace Cecilia.Test.AnalyzerTest
         {
             const string ceciliaSrc = "public var publicFunction = () => {}";
             var lexer = new Lexer();
-            var result = lexer.GetNextTokenKind(ceciliaSrc);
+            var result = lexer.GetTokenList(ceciliaSrc);
             Assert.Equal(15, result.Count);
             Assert.Equal(SyntaxKind.PublicKeyword, result[0].kind);
             Assert.Equal(SyntaxKind.Whitespace, result[1].kind);
@@ -68,7 +68,7 @@ namespace Cecilia.Test.AnalyzerTest
         {
             const string ceciliaSrc = "var num = 123.456";
             var lexer = new Lexer();
-            var result = lexer.GetNextTokenKind(ceciliaSrc);
+            var result = lexer.GetTokenList(ceciliaSrc);
             Assert.Equal(7, result.Count);
             Assert.Equal(SyntaxKind.VarKeyword, result[0].kind);
             Assert.Equal(SyntaxKind.Whitespace, result[1].kind);
@@ -86,7 +86,7 @@ namespace Cecilia.Test.AnalyzerTest
         {
             const string ceciliaSrc = "ID123456789";
             var lexer = new Lexer();
-            var result = lexer.GetNextTokenKind(ceciliaSrc);
+            var result = lexer.GetTokenList(ceciliaSrc);
             Assert.Single(result);
             Assert.Equal((SyntaxKind.Identifier, 11, ceciliaSrc), result[0]);
         }

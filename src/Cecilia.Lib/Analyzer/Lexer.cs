@@ -31,7 +31,7 @@ namespace Cecilia.Lib.Analyzer
             throw new NotImplementedException();
         }
 
-        public List<(SyntaxKind kind, int nextPos, string tokenStr)> GetNextTokenKind(string targetStr)
+        public List<(SyntaxKind kind, int nextPos, string tokenStr)> GetTokenList(string targetStr)
         {
             var tokenList = new List<(SyntaxKind kind, int nextPos, string tokenStr)>();
             if (targetStr.Length == 0)
