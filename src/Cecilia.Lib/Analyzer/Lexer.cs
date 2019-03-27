@@ -36,7 +36,7 @@ namespace Cecilia.Lib.Analyzer
             var tokenList = new List<(SyntaxKind kind, int nextPos, string tokenStr)>();
             if (targetStr.Length == 0)
             {
-                (SyntaxKind kind, int nextPos, string tokenStr) ret = (SyntaxKind.EmptyRow, 0, null);
+                (SyntaxKind kind, int nextPos, string tokenStr) ret = (SyntaxKind.Empty, 0, null);
                 tokenList.Add(ret);
                 return tokenList;
             }

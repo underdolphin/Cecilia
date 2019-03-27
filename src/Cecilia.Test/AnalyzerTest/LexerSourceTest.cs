@@ -24,7 +24,7 @@ namespace Cecilia.Test.AnalyzerTest
             const string ceciliaSrc = "";
             var lexer = new Lexer();
             var result = lexer.GetTokenList(ceciliaSrc);
-            Assert.Equal((SyntaxKind.EmptyRow, 0, null), result[0]);
+            Assert.Equal((SyntaxKind.Empty, 0, null), result[0]);
         }
 
         [Fact(DisplayName = "NamespaceTest1")]

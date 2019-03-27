@@ -20,7 +20,7 @@ namespace Cecilia.Lib.Analyzer
         #endregion
 
         #region lexer state
-        EmptyRow,
+        Empty,
         Whitespace,
         Identifier,
         #endregion
