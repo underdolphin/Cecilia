@@ -12,6 +12,7 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 using Cecilia.Lib.Analyzer;
+using Cecilia.Lib.Syntax;
 using Xunit;
 
 namespace Cecilia.Test.AnalyzerTest
