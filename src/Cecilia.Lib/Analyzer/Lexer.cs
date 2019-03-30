@@ -26,13 +26,14 @@ namespace Cecilia.Lib.Analyzer
             Utils = new LexerUtils();
         }
 
-        public List<SyntaxKind> LexicalEngine(string targetStr)
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="targetStr"></param>
+        /// <returns></returns>
         public List<(SyntaxKind kind, int nextPos, string tokenStr)> GetTokenList(string targetStr)
         {
+            // 文字列の長さが0なら直接空白であることを返す
             var tokenList = new List<(SyntaxKind kind, int nextPos, string tokenStr)>();
             if (targetStr.Length == 0)
             {
@@ -60,14 +61,29 @@ namespace Cecilia.Lib.Analyzer
         public (SyntaxKind kind, int nextPos, string tokenStr) GetTokenKind(string targetStr, int nextPos)
         {
             char targetChar = targetStr[nextPos];
+            int nextPos2 = nextPos + 1; // １つ先読み用
+            int nextPos3 = nextPos2 + 1; // 2つ先読み用
+
+            // new line
+            if (targetChar.Equals('\r'))
+            {
+                if (targetStr.Length > nextPos2 && targetStr[nextPos2].Equals('\n'))
+                {
+                    return (SyntaxKind.NewLine, ++nextPos2, null);
+                }
+                return (SyntaxKind.NewLine, ++nextPos, null);
+            }
+
+            if (targetChar.Equals('\n'))
+            {
+                return (SyntaxKind.NewLine, ++nextPos, null);
+            }
+
             if (char.IsWhiteSpace(targetChar))
             {
                 // 読み取り対象位置の文字が空白だった場合、位置を一つ進め処理を終了
                 return (SyntaxKind.Whitespace, ++nextPos, null);
             }
-
-            int nextPos2 = nextPos + 1; // １つ先読み用
-            int nextPos3 = nextPos2 + 1; // 2つ先読み用
 
             if (targetStr.Length > nextPos && Utils.IsSyntaxPunctuation(targetChar))
             {
@@ -98,8 +114,8 @@ namespace Cecilia.Lib.Analyzer
                 }
             }
 
-            var IntegerStr = "";
             // number
+            var IntegerStr = "";
             if (char.IsDigit(targetChar) || targetChar == '.')
             {
                 IntegerStr += targetChar;
@@ -117,8 +133,8 @@ namespace Cecilia.Lib.Analyzer
                 return (judge.kind, i, judge.numberStr);
             }
 
-            var IdentifierStr = "";
             // identifier and keyword
+            var IdentifierStr = "";
             if (char.IsLetter(targetChar))
             {
                 IdentifierStr += targetChar;

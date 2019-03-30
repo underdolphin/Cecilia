@@ -20,8 +20,9 @@ namespace Cecilia
     {
         static void Main(string[] args)
         {
-            var result = new Lexer().GetTokenList("public var publicFunction = () => {}");
-            Console.WriteLine(result[15]);
+            const string multiLineCommentCRLF = "\n";
+            var result = new Lexer().GetTokenList(multiLineCommentCRLF);
+            result.ForEach(x => Console.WriteLine($"{x.kind},{x.nextPos}"));
         }
     }
 }

@@ -23,6 +23,7 @@ namespace Cecilia.Lib.Analyzer
         Empty,
         Whitespace,
         Identifier,
+        NewLine,
         #endregion
 
         #region number

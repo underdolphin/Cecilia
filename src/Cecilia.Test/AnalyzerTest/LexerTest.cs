@@ -158,6 +158,16 @@ namespace Cecilia.Test.AnalyzerTest
             Assert.Equal((SyntaxKind.LoopKeyword, 4, null), new Lexer().GetTokenKind("loop", 0));
             Assert.Equal((SyntaxKind.MacroKeyword, 5, null), new Lexer().GetTokenKind("macro", 0));
         }
-        #endregion 
+        #endregion
+
+        #region other test
+        [Fact(DisplayName = "OtherTest")]
+        public void OtherTest()
+        {
+            Assert.Equal((SyntaxKind.NewLine, 1, null), new Lexer().GetTokenKind("\r", 0));
+            Assert.Equal((SyntaxKind.NewLine, 1, null), new Lexer().GetTokenKind("\n", 0));
+            Assert.Equal((SyntaxKind.NewLine, 2, null), new Lexer().GetTokenKind("\r\n", 0));
+        }
+        #endregion
     }
 }
