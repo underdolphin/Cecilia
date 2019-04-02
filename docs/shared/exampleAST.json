@@ -1,0 +1,55 @@
+{
+    "Root": {
+        "using_definitions": [
+            {
+                "using_definition": {
+                    "using_namespace_name": ""
+                }
+            }
+        ],
+        "namespace_definitions": [
+            {
+                "namespace_definition": {
+                    "namespace_name": "",
+                    "expressions": {
+                        "expression1": {
+                            "variable_name": "compare",
+                            "expression_kind": "switch",
+                            "expression_member": {
+                                "match_expressions": [],
+                                "case_expressions": []
+                            }
+                        },
+                        "expression2": {
+                            "variable_name": "func1",
+                            "expression_kind": "lambda",
+                            "expression_member": {
+                                "expressions": []
+                            }
+                        },
+                        "expression3": {
+                            "variable_name": "loop1",
+                            "expression_kind": "loop",
+                            "expression_member": {
+                                "loop_cond_member": {
+                                    "start_variable_name": "",
+                                    "start_expression": {},
+                                    "end_expression": {},
+                                    "step_exoression": {}
+                                },
+                                "loop_body_expressions": []
+                            }
+                        },
+                        "expression4": {
+                            "variable_name": null,
+                            "expression_kind": "return",
+                            "expression_member": {
+                                "return_expression": []
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}
