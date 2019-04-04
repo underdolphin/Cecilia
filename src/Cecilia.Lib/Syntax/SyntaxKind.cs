@@ -370,6 +370,10 @@ namespace Cecilia.Lib.Syntax
         /// macro
         /// </summary>
         MacroKeyword,
+        /// <summary>
+        /// return
+        /// </summary>
+        ReturnKeyword,
         #endregion
     }
 }

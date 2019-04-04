@@ -362,6 +362,8 @@ namespace Cecilia.Lib.Analyzer
                     return (SyntaxKind.LoopKeyword, null);
                 case "macro":
                     return (SyntaxKind.MacroKeyword, null);
+                case "return":
+                    return (SyntaxKind.ReturnKeyword, null);
                 default:
                     return (SyntaxKind.Identifier, targetStr);
             }

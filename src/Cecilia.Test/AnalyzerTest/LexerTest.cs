@@ -158,6 +158,7 @@ namespace Cecilia.Test.AnalyzerTest
             Assert.Equal((SyntaxKind.SwitchKeyword, 6, null), new Lexer().GetTokenKind("switch", 0));
             Assert.Equal((SyntaxKind.LoopKeyword, 4, null), new Lexer().GetTokenKind("loop", 0));
             Assert.Equal((SyntaxKind.MacroKeyword, 5, null), new Lexer().GetTokenKind("macro", 0));
+            Assert.Equal((SyntaxKind.ReturnKeyword, 6, null), new Lexer().GetTokenKind("return", 0));
         }
         #endregion
 
