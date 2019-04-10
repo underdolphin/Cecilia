@@ -14,7 +14,6 @@ BoolKeyword: 'bool';
 CharKeyword: 'char';
 StringKeyword: 'string';
 ObjectKeyword: 'object';
-VoidKeyword: 'void';
 ByteKeyword: 'byte';
 ShortKeyword: 'short';
 IntKeyword: 'int';

@@ -84,7 +84,56 @@ expression: (
 		| switch_expression
 		| loop_expression
 		| return_expression
+		| conditional_expression
 	) SemiColon?;
+
+conditional_expression: conditional_or_expression;
+
+conditional_or_expression:
+	conditional_and_expression (
+		BarBar conditional_and_expression
+	)*;
+
+conditional_and_expression:
+	inclusive_or_expression (AmpAmp inclusive_or_expression)*;
+
+inclusive_or_expression:
+	exclusive_or_expression (Bar exclusive_or_expression)*;
+
+exclusive_or_expression: and_expression (Caret and_expression)*;
+
+and_expression:
+	equality_expression (Ampersand equality_expression)*;
+
+equality_expression:
+	relational_expression (
+		(EqualsEquals | ExclamationEquals) relational_expression
+	)*;
+
+relational_expression:
+	shift_expression (
+		(
+			LessThan
+			| GreaterThan
+			| LessThanEqual
+			| GreaterThanEqual
+		) shift_expression
+	)*;
+
+shift_expression:
+	additive_expression (
+		(LessThanLessThan | GreaterThanGreaterThan) additive_expression
+	)*;
+
+additive_expression:
+	multiplicative_expression (
+		(Plus | Minus) multiplicative_expression
+	)*;
+
+multiplicative_expression:
+	unary_expression (
+		(Asterisk | Slash | Parcent) unary_expression
+	)*;
 
 assignment_expression:
 	unary_expression assignment_operator expression;
@@ -98,7 +147,10 @@ unary_expression:
 	| Ampersand unary_expression
 	| Asterisk unary_expression;
 
-primary_expression: primary_expression_start;
+primary_expression:
+	primary_expression_start index_bracket* (
+		(member_access | PlusPlus | MinusMinus) index_bracket*
+	)*;
 
 primary_expression_start:
 	literal
@@ -113,6 +165,12 @@ assignment_operator:
 	| SlashEqual
 	| BarEqual
 	| CaretEqual;
+
+// array index
+index_bracket: LBracket expression (Comma expression)* RBracket;
+
+// member access
+member_access: Dot Identifier;
 
 // Loop expression
 loop_expression: LoopKeyword loop_condition? block;
@@ -138,13 +196,24 @@ literal:
 	| string_literal
 	| IntegerLiteral
 	| FloatingLiteral
-	| CharacterLiteral;
+	| CharacterLiteral
+	| object_literal;
 
 // true or false
 boolean_literal: TrueKeyword | FalseKeyword;
 
 // String literal
 string_literal: RegularString;
+
+// object definition
+object_literal: LBrace object_member_declarators RBrace;
+
+object_member_declaration: object_member_declarators;
+
+object_member_declarators:
+	object_member_declarator (Comma object_member_declarator)*;
+
+object_member_declarator: expression Colon expression;
 
 // Function definition expression.
 function_expression: function_signature Arrow function_body;
