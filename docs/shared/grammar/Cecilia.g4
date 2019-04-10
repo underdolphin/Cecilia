@@ -87,7 +87,10 @@ expression: (
 		| conditional_expression
 	) SemiColon?;
 
-conditional_expression: conditional_or_expression;
+conditional_expression:
+	conditional_or_expression (
+		Question expression Colon expression
+	)?;
 
 conditional_or_expression:
 	conditional_and_expression (
@@ -164,7 +167,9 @@ assignment_operator:
 	| AsteriskEqual
 	| SlashEqual
 	| BarEqual
-	| CaretEqual;
+	| CaretEqual
+	| LessThanLessThanEqual
+	| GreaterThanGreaterThanEqual;
 
 // array index
 index_bracket: LBracket expression (Comma expression)* RBracket;

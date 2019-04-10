@@ -89,14 +89,17 @@ SlashEqual: '/=';
 BarEqual: '|=';
 CaretEqual: '^=';
 
+LessThanLessThanEqual: '<<=';
+GreaterThanGreaterThanEqual: '>>=';
+
 IntegerLiteral: [0-9]+ IntegerTypeSuffix?;
 FloatingLiteral:
 	[0-9]* Dot [0-9]+ ExponentPart? [FfDdMm]?
 	| [0-9]+ ([FfDdMm] | ExponentPart [FfDdMm]?);
 CharacterLiteral:
-	'\'' (~['\\\r\n\u0085\u2028\u2029] | CommonCharacter) '\'';
+	SingleQuote (~['\\\r\n\u0085\u2028\u2029] | CommonCharacter) SingleQuote;
 RegularString:
-	'"' (~["\\\r\n\u0085\u2028\u2029] | CommonCharacter)* '"';
+	DoubleQuote (~["\\\r\n\u0085\u2028\u2029] | CommonCharacter)* DoubleQuote;
 
 fragment IntegerTypeSuffix: [1L]? [uU]| [uU]| [1L];
 fragment ExponentPart: [eE] ('+' | '-')? [0-9]+;
