@@ -8,4 +8,11 @@
     <PackageReference Include="Sprache" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Analyzer\Grammar.cs">
+      <ExcludeFromSourceAnalysis>True</ExcludeFromSourceAnalysis>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+  </ItemGroup>
+
 </Project>

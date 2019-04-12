@@ -13,6 +13,7 @@
    limitations under the License. */
 using Cecilia.Lib.Analyzer;
 using Sprache;
+using System.Linq;
 using Xunit;
 
 namespace Cecilia.Test.AnalyzerTest
@@ -24,6 +25,17 @@ namespace Cecilia.Test.AnalyzerTest
         {
             var ceciliaSrc = "abc123";
             Assert.Equal(ceciliaSrc, Grammar.Identifier.Parse(ceciliaSrc));
+        }
+
+        [Fact(DisplayName = "QualifiedIdentifierTest")]
+        public void QualifiedIdentifierTest()
+        {
+            var ceciliaSrc = "abc.d12";
+            var parseResult = Grammar.QualifiedIdentifier.Parse(ceciliaSrc);
+            var parseList = parseResult.ToList();
+
+            Assert.Equal("abc", parseList[0]);
+            Assert.Equal("d12", parseList[1]);
         }
     }
 }

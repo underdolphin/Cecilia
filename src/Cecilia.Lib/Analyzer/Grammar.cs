@@ -13,16 +13,24 @@
    limitations under the License. */
 using Sprache;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Cecilia.Lib.Analyzer
 {
     public class Grammar
     {
-        // Identifier: Letter LetterOrDigit*;
+        /// <summary>
+        /// Identifier: Letter LetterOrDigit*;
+        /// </summary>
         public static readonly Parser<string> Identifier =
             from first in Parse.Letter.Once()
             from rest in Parse.LetterOrDigit.Many()
             select new string(first.Concat(rest).ToArray());
+
+        // qualified_identifier: (Identifier) (Dot Identifier)*;
+        public static readonly Parser<IEnumerable<string>> QualifiedIdentifier =
+            Identifier.DelimitedBy(Parse.Char('.').Token())
+            .Named("QualifiedIdentifier");
     }
 }
