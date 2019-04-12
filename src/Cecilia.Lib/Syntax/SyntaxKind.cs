@@ -375,5 +375,9 @@ namespace Cecilia.Lib.Syntax
         /// </summary>
         ReturnKeyword,
         #endregion
+
+        #region syntax group
+        UsingDirective
+        #endregion
     }
 }

@@ -11,8 +11,8 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
+using Cecilia.Lib.Syntax;
 using Sprache;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,9 +28,17 @@ namespace Cecilia.Lib.Analyzer
             from rest in Parse.LetterOrDigit.Many()
             select new string(first.Concat(rest).ToArray());
 
-        // qualified_identifier: (Identifier) (Dot Identifier)*;
+        /// <summary>
+        /// qualified_identifier: (Identifier) (Dot Identifier)*;
+        /// </summary>
         public static readonly Parser<IEnumerable<string>> QualifiedIdentifier =
             Identifier.DelimitedBy(Parse.Char('.').Token())
             .Named("QualifiedIdentifier");
+
+        public static readonly Parser<UsingDirectiveSyntax> UsingDirective =
+            from usingKeyword in Parse.IgnoreCase(CeciliaKeywords.Using).Token()
+            from usingNamespace in QualifiedIdentifier.Select(id => id)
+            from colon in Parse.Char(';').Optional()
+            select new UsingDirectiveSyntax(usingNamespace.ToList());
     }
 }
