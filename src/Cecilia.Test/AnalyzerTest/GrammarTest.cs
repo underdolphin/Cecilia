@@ -12,7 +12,6 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 using Cecilia.Lib.Analyzer;
-using Cecilia.Lib.Syntax;
 using Sprache;
 using System.Linq;
 using Xunit;
@@ -37,28 +36,6 @@ namespace Cecilia.Test.AnalyzerTest
 
             Assert.Equal("abc", parseList[0]);
             Assert.Equal("d12", parseList[1]);
-        }
-
-        [Fact(DisplayName = "UsingDirectiveTest")]
-        public void UsingDirectiveTest()
-        {
-            var ceciliaSrc = "using Test.Test";
-            var parseResult = Grammar.UsingDirective.Parse(ceciliaSrc);
-
-            Assert.Equal("Test", parseResult.UsingNamespace[0]);
-            Assert.Equal("Test", parseResult.UsingNamespace[1]);
-            Assert.Equal(SyntaxKind.UsingDirective, parseResult.Kind);
-        }
-
-        [Fact(DisplayName = "UsingDirectiveTest2")]
-        public void UsingDirectiveTest2()
-        {
-            var ceciliaSrc = "using Test.Test;";
-            var parseResult = Grammar.UsingDirective.Parse(ceciliaSrc);
-
-            Assert.Equal("Test", parseResult.UsingNamespace[0]);
-            Assert.Equal("Test", parseResult.UsingNamespace[1]);
-            Assert.Equal(SyntaxKind.UsingDirective, parseResult.Kind);
         }
     }
 }

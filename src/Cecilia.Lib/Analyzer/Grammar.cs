@@ -35,10 +35,19 @@ namespace Cecilia.Lib.Analyzer
             Identifier.DelimitedBy(Parse.Char('.').Token())
             .Named("QualifiedIdentifier");
 
+        /// <summary>
+        /// using_directive: UsingKeyword qualified_identifier;
+        /// </summary>
         public static readonly Parser<UsingDirectiveSyntax> UsingDirective =
             from usingKeyword in Parse.IgnoreCase(CeciliaKeywords.Using).Token()
             from usingNamespace in QualifiedIdentifier.Select(id => id)
             from colon in Parse.Char(';').Optional()
             select new UsingDirectiveSyntax(usingNamespace.ToList());
+
+        /// <summary>
+        /// using_directives: using_directive+;
+        /// </summary>
+        public static readonly Parser<IEnumerable<UsingDirectiveSyntax>> UsingDirectives =
+            UsingDirective.Many();
     }
 }
