@@ -21,7 +21,7 @@ namespace_member_declaration:
 namespace_declaration:
 	NamespaceKeyword qualified_identifier namespace_body SemiColon?;
 
-namespace_body: LBrace using_directives? RBrace;
+namespace_body: LBrace using_directives? namespace_member_declarations? RBrace;
 
 type_declaration: all_member_modifiers? (member_declaration);
 
