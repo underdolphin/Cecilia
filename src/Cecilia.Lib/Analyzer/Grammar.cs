@@ -12,6 +12,7 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 using Cecilia.Lib.Syntax;
+using Cecilia.Lib.Syntax.Literal;
 using Sprache;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,5 +55,10 @@ namespace Cecilia.Lib.Analyzer
             Parse.String(CeciliaKeywords.Public).Return(SyntaxKind.Public)
             .Or(Parse.String(CeciliaKeywords.Private).Return(SyntaxKind.Private))
             .Or(Parse.String(CeciliaKeywords.Internal).Return(SyntaxKind.Internal));
+
+
+        public static readonly Parser<CeciliaBool> BooleanLiteral =
+            from str in Parse.String("true").Or(Parse.String("false"))
+            select new CeciliaBool(bool.Parse(new string(str.ToArray())));
     }
 }
