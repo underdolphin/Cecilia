@@ -35,7 +35,7 @@ namespace Cecilia.Test.AnalyzerTest
             var lexer = new Lexer();
             var result = lexer.GetTokenList(ceciliaSrc);
             Assert.Equal(3, result.Count);
-            Assert.Equal((SyntaxKind.NamespaceKeyword, 9, null), result[0]);
+            Assert.Equal((SyntaxKind.Namespace, 9, null), result[0]);
             Assert.Equal((SyntaxKind.LBrace, 10, null), result[1]);
             Assert.Equal((SyntaxKind.RBrace, 11, null), result[2]);
         }
@@ -47,7 +47,7 @@ namespace Cecilia.Test.AnalyzerTest
             var lexer = new Lexer();
             var result = lexer.GetTokenList(ceciliaSrc);
             Assert.Equal(15, result.Count);
-            Assert.Equal(SyntaxKind.PublicKeyword, result[0].kind);
+            Assert.Equal(SyntaxKind.Public, result[0].kind);
             Assert.Equal(SyntaxKind.Whitespace, result[1].kind);
             Assert.Equal(SyntaxKind.VarKeyword, result[2].kind);
             Assert.Equal(SyntaxKind.Whitespace, result[3].kind);

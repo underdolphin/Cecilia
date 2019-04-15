@@ -45,9 +45,14 @@ namespace Cecilia.Lib.Analyzer
             select new UsingDirectiveSyntax(usingNamespace.ToList());
 
         /// <summary>
-        /// using_directives: using_directive+;
+        /// all_member_modifier:
+        /// PublicKeyword
+        /// | PrivateKeyword
+        /// | InternalKeyword;
         /// </summary>
-        public static readonly Parser<IEnumerable<UsingDirectiveSyntax>> UsingDirectives =
-            UsingDirective.Many();
+        public static readonly Parser<SyntaxKind> AllMemberModifier =
+            Parse.String(CeciliaKeywords.Public).Return(SyntaxKind.Public)
+            .Or(Parse.String(CeciliaKeywords.Private).Return(SyntaxKind.Private))
+            .Or(Parse.String(CeciliaKeywords.Internal).Return(SyntaxKind.Internal));
     }
 }

@@ -99,22 +99,22 @@ namespace Cecilia.Test.AnalyzerTest
         [Fact(DisplayName = "EmbeddedTypeKeywordTest")]
         public void GetEmbeddedTypeKeywordTest()
         {
-            Assert.Equal((SyntaxKind.VoidKeyword, 4, null), new Lexer().GetTokenKind("void", 0));
-            Assert.Equal((SyntaxKind.Int8Keyword, 4, null), new Lexer().GetTokenKind("int8", 0));
-            Assert.Equal((SyntaxKind.Int16Keyword, 5, null), new Lexer().GetTokenKind("int16", 0));
-            Assert.Equal((SyntaxKind.Int32Keyword, 5, null), new Lexer().GetTokenKind("int32", 0));
-            Assert.Equal((SyntaxKind.Int64Keyword, 5, null), new Lexer().GetTokenKind("int64", 0));
-            Assert.Equal((SyntaxKind.UInt8Keyword, 5, null), new Lexer().GetTokenKind("uint8", 0));
-            Assert.Equal((SyntaxKind.UInt16Keyword, 6, null), new Lexer().GetTokenKind("uint16", 0));
-            Assert.Equal((SyntaxKind.UInt32Keyword, 6, null), new Lexer().GetTokenKind("uint32", 0));
-            Assert.Equal((SyntaxKind.UInt64Keyword, 6, null), new Lexer().GetTokenKind("uint64", 0));
-            Assert.Equal((SyntaxKind.HalfKeyword, 4, null), new Lexer().GetTokenKind("half", 0));
-            Assert.Equal((SyntaxKind.FloatKeyword, 5, null), new Lexer().GetTokenKind("float", 0));
-            Assert.Equal((SyntaxKind.DoubleKeyword, 6, null), new Lexer().GetTokenKind("double", 0));
-            Assert.Equal((SyntaxKind.BoolKeyword, 4, null), new Lexer().GetTokenKind("bool", 0));
-            Assert.Equal((SyntaxKind.CharKeyword, 4, null), new Lexer().GetTokenKind("char", 0));
-            Assert.Equal((SyntaxKind.StringKeyword, 6, null), new Lexer().GetTokenKind("string", 0));
-            Assert.Equal((SyntaxKind.ObjectKeyword, 6, null), new Lexer().GetTokenKind("object", 0));
+            Assert.Equal((SyntaxKind.VoidType, 4, null), new Lexer().GetTokenKind("void", 0));
+            Assert.Equal((SyntaxKind.ByteType, 4, null), new Lexer().GetTokenKind("int8", 0));
+            Assert.Equal((SyntaxKind.UByteType, 5, null), new Lexer().GetTokenKind("int16", 0));
+            Assert.Equal((SyntaxKind.ShortType, 5, null), new Lexer().GetTokenKind("int32", 0));
+            Assert.Equal((SyntaxKind.UShortType, 5, null), new Lexer().GetTokenKind("int64", 0));
+            Assert.Equal((SyntaxKind.IntType, 5, null), new Lexer().GetTokenKind("uint8", 0));
+            Assert.Equal((SyntaxKind.UIntType, 6, null), new Lexer().GetTokenKind("uint16", 0));
+            Assert.Equal((SyntaxKind.LongType, 6, null), new Lexer().GetTokenKind("uint32", 0));
+            Assert.Equal((SyntaxKind.ULongType, 6, null), new Lexer().GetTokenKind("uint64", 0));
+            Assert.Equal((SyntaxKind.HalfType, 4, null), new Lexer().GetTokenKind("half", 0));
+            Assert.Equal((SyntaxKind.FloatType, 5, null), new Lexer().GetTokenKind("float", 0));
+            Assert.Equal((SyntaxKind.DoubleType, 6, null), new Lexer().GetTokenKind("double", 0));
+            Assert.Equal((SyntaxKind.BoolType, 4, null), new Lexer().GetTokenKind("bool", 0));
+            Assert.Equal((SyntaxKind.CharType, 4, null), new Lexer().GetTokenKind("char", 0));
+            Assert.Equal((SyntaxKind.StringType, 6, null), new Lexer().GetTokenKind("string", 0));
+            Assert.Equal((SyntaxKind.ObjectType, 6, null), new Lexer().GetTokenKind("object", 0));
         }
         #endregion
 
@@ -140,12 +140,12 @@ namespace Cecilia.Test.AnalyzerTest
         [Fact(DisplayName = "GetNamespaceAccessModifierTest")]
         public void GetNamespaceAccessModifierTest()
         {
-            Assert.Equal((SyntaxKind.NamespaceKeyword, 9, null), new Lexer().GetTokenKind("namespace", 0));
-            Assert.Equal((SyntaxKind.PublicKeyword, 6, null), new Lexer().GetTokenKind("public", 0));
-            Assert.Equal((SyntaxKind.PrivateKeyword, 7, null), new Lexer().GetTokenKind("private", 0));
-            Assert.Equal((SyntaxKind.ProtectedKeyword, 9, null), new Lexer().GetTokenKind("protected", 0));
-            Assert.Equal((SyntaxKind.InternalKeyword, 8, null), new Lexer().GetTokenKind("internal", 0));
-            Assert.Equal((SyntaxKind.UsingKeyword, 5, null), new Lexer().GetTokenKind("using", 0));
+            Assert.Equal((SyntaxKind.Namespace, 9, null), new Lexer().GetTokenKind("namespace", 0));
+            Assert.Equal((SyntaxKind.Public, 6, null), new Lexer().GetTokenKind("public", 0));
+            Assert.Equal((SyntaxKind.Private, 7, null), new Lexer().GetTokenKind("private", 0));
+            Assert.Equal((SyntaxKind.Protected, 9, null), new Lexer().GetTokenKind("protected", 0));
+            Assert.Equal((SyntaxKind.Internal, 8, null), new Lexer().GetTokenKind("internal", 0));
+            Assert.Equal((SyntaxKind.Using, 5, null), new Lexer().GetTokenKind("using", 0));
         }
         #endregion
 

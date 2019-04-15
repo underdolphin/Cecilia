@@ -309,49 +309,49 @@ namespace Cecilia.Lib.Analyzer
             switch (targetStr)
             {
                 case "void":
-                    return (SyntaxKind.VoidKeyword, null);
+                    return (SyntaxKind.VoidType, null);
                 case "int8":
-                    return (SyntaxKind.Int8Keyword, null);
+                    return (SyntaxKind.ByteType, null);
                 case "int16":
-                    return (SyntaxKind.Int16Keyword, null);
+                    return (SyntaxKind.UByteType, null);
                 case "int32":
-                    return (SyntaxKind.Int32Keyword, null);
+                    return (SyntaxKind.ShortType, null);
                 case "int64":
-                    return (SyntaxKind.Int64Keyword, null);
+                    return (SyntaxKind.UShortType, null);
                 case "uint8":
-                    return (SyntaxKind.UInt8Keyword, null);
+                    return (SyntaxKind.IntType, null);
                 case "uint16":
-                    return (SyntaxKind.UInt16Keyword, null);
+                    return (SyntaxKind.UIntType, null);
                 case "uint32":
-                    return (SyntaxKind.UInt32Keyword, null);
+                    return (SyntaxKind.LongType, null);
                 case "uint64":
-                    return (SyntaxKind.UInt64Keyword, null);
+                    return (SyntaxKind.ULongType, null);
                 case "half":
-                    return (SyntaxKind.HalfKeyword, null);
+                    return (SyntaxKind.HalfType, null);
                 case "float":
-                    return (SyntaxKind.FloatKeyword, null);
+                    return (SyntaxKind.FloatType, null);
                 case "double":
-                    return (SyntaxKind.DoubleKeyword, null);
+                    return (SyntaxKind.DoubleType, null);
                 case "bool":
-                    return (SyntaxKind.BoolKeyword, null);
+                    return (SyntaxKind.BoolType, null);
                 case "char":
-                    return (SyntaxKind.CharKeyword, null);
+                    return (SyntaxKind.CharType, null);
                 case "string":
-                    return (SyntaxKind.StringKeyword, null);
+                    return (SyntaxKind.StringType, null);
                 case "object":
-                    return (SyntaxKind.ObjectKeyword, null);
+                    return (SyntaxKind.ObjectType, null);
                 case "namespace":
-                    return (SyntaxKind.NamespaceKeyword, null);
+                    return (SyntaxKind.Namespace, null);
                 case "public":
-                    return (SyntaxKind.PublicKeyword, null);
+                    return (SyntaxKind.Public, null);
                 case "private":
-                    return (SyntaxKind.PrivateKeyword, null);
+                    return (SyntaxKind.Private, null);
                 case "protected":
-                    return (SyntaxKind.ProtectedKeyword, null);
+                    return (SyntaxKind.Protected, null);
                 case "internal":
-                    return (SyntaxKind.InternalKeyword, null);
+                    return (SyntaxKind.Internal, null);
                 case "using":
-                    return (SyntaxKind.UsingKeyword, null);
+                    return (SyntaxKind.Using, null);
                 case "var":
                     return (SyntaxKind.VarKeyword, null);
                 case "const":

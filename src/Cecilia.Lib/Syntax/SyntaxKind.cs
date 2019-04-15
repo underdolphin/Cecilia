@@ -252,73 +252,73 @@ namespace Cecilia.Lib.Syntax
         /// <summary>
         /// void
         /// </summary>
-        VoidKeyword,
+        VoidType,
         /// <summary>
-        /// int8
+        /// byte -- 8bit integer
         /// </summary>
-        Int8Keyword,
+        ByteType,
         /// <summary>
-        /// int16
+        /// ubyte -- 8bit unsigned integer
         /// </summary>
-        Int16Keyword,
+        UByteType,
         /// <summary>
-        /// int32
+        /// short -- 16bit integer 
         /// </summary>
-        Int32Keyword,
+        ShortType,
         /// <summary>
-        /// int64
+        /// ushort -- 16bit unsigned integer
         /// </summary>
-        Int64Keyword,
+        UShortType,
         /// <summary>
-        /// uint8
+        /// int -- 32bit integer 
         /// </summary>
-        UInt8Keyword,
+        IntType,
         /// <summary>
-        /// uint16
+        /// uint -- 32bit unsigned integer
         /// </summary>
-        UInt16Keyword,
+        UIntType,
         /// <summary>
-        /// uint32
+        /// long -- 64bit integer
         /// </summary>
-        UInt32Keyword,
+        LongType,
         /// <summary>
-        /// uint64
+        /// ulong -- 64bit unsigned integer
         /// </summary>
-        UInt64Keyword,
+        ULongType,
         /// <summary>
         /// half -- 16bit floating-point
         /// </summary>
-        HalfKeyword,
+        HalfType,
         /// <summary>
         /// float -- 32bit floating-point
         /// </summary>
-        FloatKeyword,
+        FloatType,
         /// <summary>
         /// double -- 64bit floating-point
         /// </summary>
-        DoubleKeyword,
+        DoubleType,
         #endregion
 
         #region other basic type keywords
         /// <summary>
         /// bool
         /// </summary>
-        BoolKeyword,
+        BoolType,
         /// <summary>
         /// char
         /// </summary>
-        CharKeyword,
+        CharType,
         #endregion
 
         #region other special support keywords
         /// <summary>
         /// string
         /// </summary>
-        StringKeyword,
+        StringType,
         /// <summary>
         /// object
         /// </summary>
-        ObjectKeyword,
+        ObjectType,
         #endregion
         #endregion
 
@@ -326,27 +326,27 @@ namespace Cecilia.Lib.Syntax
         /// <summary>
         /// namespace
         /// </summary>
-        NamespaceKeyword,
+        Namespace,
         /// <summary>
         /// public
         /// </summary>
-        PublicKeyword,
+        Public,
         /// <summary>
         /// private
         /// </summary>
-        PrivateKeyword,
+        Private,
         /// <summary>
         /// protected
         /// </summary>
-        ProtectedKeyword,
+        Protected,
         /// <summary>
         /// internal
         /// </summary>
-        InternalKeyword,
+        Internal,
         /// <summary>
         /// using
         /// </summary>
-        UsingKeyword,
+        Using,
         #endregion
 
         #region flow and definition keywords
