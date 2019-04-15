@@ -13,7 +13,7 @@
    limitations under the License. */
 namespace Cecilia.Lib.Syntax
 {
-    public abstract class SytanxBase
+    public abstract class SyntaxBase
     {
         public abstract SyntaxKind Kind { get; }
     }

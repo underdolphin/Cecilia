@@ -15,7 +15,7 @@ using System.Collections.Generic;
 
 namespace Cecilia.Lib.Syntax
 {
-    public class UsingDirectiveSyntax : SytanxBase
+    public class UsingDirectiveSyntax : SyntaxBase
     {
         public override SyntaxKind Kind => SyntaxKind.UsingDirective;
 
