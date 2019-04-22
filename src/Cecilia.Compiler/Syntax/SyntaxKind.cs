@@ -11,7 +11,7 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
-namespace Cecilia.Lib.Syntax
+namespace Cecilia.Compiler.Syntax
 {
     public enum SyntaxKind
     {
@@ -377,7 +377,10 @@ namespace Cecilia.Lib.Syntax
         #endregion
 
         #region syntax group
-        UsingDirective
+        UsingDirective,
+        BinaryExpression,
+        UnaryExpression,
+        VariableDeclare
         #endregion
     }
 }

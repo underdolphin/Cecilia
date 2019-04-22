@@ -13,13 +13,22 @@
    limitations under the License. */
 using System;
 
-namespace Cecilia
+namespace Cecilia.Compiler.Analyzer
 {
-    class Program
+    public class VariableInfo
     {
-        static void Main(string[] args)
+        public string VariableName { get; private set; }
+        public string TypeName { get; private set; }
+        public string VariableId { get; private set; }
+        public string Value { get; private set; }
+
+        public VariableInfo(string variableName, string typeName = null, string value = null)
         {
-            
+            VariableName = variableName;
+            TypeName = typeName;
+            VariableId = Guid.NewGuid().ToString("N");
+
+
         }
     }
 }

@@ -11,13 +11,13 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
-using Cecilia.Lib.Syntax;
-using Cecilia.Lib.Syntax.Literal;
+using Cecilia.Compiler.Syntax;
+using Cecilia.Compiler.Syntax.Literal;
 using Sprache;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Cecilia.Lib.Analyzer
+namespace Cecilia.Compiler.Analyzer
 {
     public class Grammar
     {

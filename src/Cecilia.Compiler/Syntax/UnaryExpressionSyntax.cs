@@ -11,15 +11,23 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
-using System;
-
-namespace Cecilia
+namespace Cecilia.Compiler.Syntax
 {
-    class Program
+    /// <summary>
+    /// Expression for unary operation.
+    /// </summary>
+    public class UnaryExpressionSyntax : ExpressionSyntax
     {
-        static void Main(string[] args)
+        public override SyntaxKind Kind => SyntaxKind.UnaryExpression;
+
+        public string OperatorStr { get; private set; }
+
+        public ExpressionSyntax RightHandSide { get; private set; }
+
+        public UnaryExpressionSyntax(string operatorStr, ExpressionSyntax rhs)
         {
-            
+            OperatorStr = operatorStr;
+            RightHandSide = rhs;
         }
     }
 }

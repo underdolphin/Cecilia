@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Cecilia.Lib\Cecilia.Lib.csproj" />
+    <ProjectReference Include="..\Cecilia.Compiler\Cecilia.Compiler.csproj" />
   </ItemGroup>
 
 </Project>

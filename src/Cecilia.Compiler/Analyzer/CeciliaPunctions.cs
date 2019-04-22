@@ -15,7 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Cecilia.Lib.Analyzer
+namespace Cecilia.Compiler.Analyzer
 {
     public class CeciliaPunctions
     {

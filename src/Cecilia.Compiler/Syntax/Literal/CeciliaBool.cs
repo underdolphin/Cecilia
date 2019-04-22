@@ -11,15 +11,16 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
-using System;
+using Cecilia.Compiler.Syntax;
 
-namespace Cecilia
+namespace Cecilia.Compiler.Syntax.Literal
 {
-    class Program
+    public class CeciliaBool : SyntaxBase
     {
-        static void Main(string[] args)
-        {
-            
-        }
+        public override SyntaxKind Kind => SyntaxKind.BoolType;
+
+        public bool Value { get; private set; }
+
+        public CeciliaBool(bool value) { Value = value; }
     }
 }

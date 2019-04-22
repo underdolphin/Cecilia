@@ -11,15 +11,19 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
-using System;
+using System.Collections.Generic;
 
-namespace Cecilia
+namespace Cecilia.Compiler.Syntax
 {
-    class Program
+    public class UsingDirectiveSyntax : SyntaxBase
     {
-        static void Main(string[] args)
+        public override SyntaxKind Kind => SyntaxKind.UsingDirective;
+
+        public List<string> UsingNamespace { get; private set; }
+
+        public UsingDirectiveSyntax(List<string> usingNamespace)
         {
-            
+            UsingNamespace = usingNamespace;
         }
     }
 }

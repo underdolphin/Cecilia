@@ -11,15 +11,13 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
-using System;
-
-namespace Cecilia
+namespace Cecilia.Compiler.Syntax
 {
-    class Program
+    public class VariableDeclareSyntax : SyntaxBase
     {
-        static void Main(string[] args)
-        {
-            
-        }
+        public override SyntaxKind Kind => SyntaxKind.VariableDeclare;
+
+        public bool IsConstant { get; private set; }
+        public string VariableIdentifier { get; private set; }
     }
 }

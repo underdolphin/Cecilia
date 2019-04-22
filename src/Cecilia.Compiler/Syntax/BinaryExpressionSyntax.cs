@@ -11,19 +11,28 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
+using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace Cecilia.Lib.Syntax
+namespace Cecilia.Compiler.Syntax
 {
-    public class UsingDirectiveSyntax : SyntaxBase
+    public class BinaryExpressionSyntax : ExpressionSyntax
     {
-        public override SyntaxKind Kind => SyntaxKind.UsingDirective;
+        public override SyntaxKind Kind => SyntaxKind.BinaryExpression;
 
-        public List<string> UsingNamespace { get; private set; }
+        public string OperatorStr { get; private set; }
 
-        public UsingDirectiveSyntax(List<string> usingNamespace)
+        public ExpressionSyntax LeftHandSide { get; private set; }
+        public ExpressionSyntax RightHandSide { get; private set; }
+
+        public BinaryExpressionSyntax(string operatorStr, ExpressionSyntax lhs, ExpressionSyntax rhs)
         {
-            UsingNamespace = usingNamespace;
+            OperatorStr = operatorStr;
+            LeftHandSide = lhs;
+            RightHandSide = rhs;
         }
+
     }
 }
+
