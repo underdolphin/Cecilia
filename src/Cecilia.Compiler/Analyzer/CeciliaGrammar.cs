@@ -109,8 +109,11 @@ namespace Cecilia.Compiler.Analyzer
             SemicolonOpt.Rule = SemiColon.Q();
 
             var Identifier = TerminalFactory.CreateCSharpIdentifier("identifier");
-            var NumberLiteral = new NumberLiteral("NumberLiteral");
-            var StringLiteral = new StringLiteral("string_literal");
+            var NumberLiteral = TerminalFactory.CreateCSharpNumber("NumberLiteral");
+            var StringLiteral = TerminalFactory.CreateCSharpString("string_literal");
+
+            var SingleLineComment = new CommentTerminal("SingleLineComment", "//", "\r", "\n");
+            NonGrammarTerminals.Add(SingleLineComment);
             #endregion
 
             #region non terminals
@@ -155,8 +158,8 @@ namespace Cecilia.Compiler.Analyzer
             var BinOp = new NonTerminal("bin_op");
             var AssignmentExpression = new NonTerminal("assignment_expression");
             var UnaryExpression = new NonTerminal("unary_expression");
+            var UnaryOperator = new NonTerminal("unary_operator");
             var PrimaryExpression = new NonTerminal("primary_expression");
-            var PrimaryExpressionStart = new NonTerminal("primary_expression_start");
             var AssignmentOperator = new NonTerminal("assignment_operator");
 
             // loop expression
@@ -187,6 +190,8 @@ namespace Cecilia.Compiler.Analyzer
             var IndexBracketOpt = new NonTerminal("index_bracketOpt");
             IndexBracketOpt.Rule = MakeStarRule(IndexBracketOpt, IndexBracket);
             var MemberAccess = new NonTerminal("member_access");
+            var MemberAccessSegmentsOpt = new NonTerminal("member_access_segmentsOpt");
+            var MemberAccessSegment = new NonTerminal("member_access_segment");
 
             // literal
             var Literal = new NonTerminal("literal");
@@ -210,7 +215,7 @@ namespace Cecilia.Compiler.Analyzer
             RegisterOperators(-3, Equals, PlusEqual, MinusEqual, AsteriskEqual, SlashEqual, BarEqual, CaretEqual, GreaterThanGreaterThanEqual, LessThanLessThanEqual);
 
             MarkPunctuation(";", ",", "(", ")", "{", "}", "[", "]", ":");
-            MarkTransient(NamespaceMemberDeclaration, MemberDeclaration);
+            MarkTransient(NamespaceMemberDeclaration, MemberDeclaration, Literal, BinOp, PrimaryExpression);
 
             AddTermsReportGroup("assignment",
                 Equals,
@@ -283,10 +288,11 @@ namespace Cecilia.Compiler.Analyzer
                 StringKeyword | ObjectKeyword;
             UserDefinitionType.Rule = QualifiedIdentifier;
 
-            // expressions
+            #region expressions
             Expression.Rule =
                 FunctionExpression
                 | BinOpExpression
+                | PrimaryExpression
                 /*| AssignmentExpression
                 | SwitchExpression
                 | LoopExpression
@@ -297,6 +303,8 @@ namespace Cecilia.Compiler.Analyzer
                 Expression + ConditionalExpressionBody;
             ConditionalExpressionBody.Rule =
                 PreferShiftHere() + Question + Expression + Colon + Expression;
+
+            // bin op expression
             BinOpExpression.Rule =
                 Expression + BinOp + Expression;
             BinOp.Rule =
@@ -327,26 +335,28 @@ namespace Cecilia.Compiler.Analyzer
                 | GreaterThanGreaterThanEqual
                 | LessThanLessThanEqual
                 | QuestionQuestion;
-            // assignment expression
-            AssignmentExpression.Rule =
-                UnaryExpression + AssignmentOperator + Expression;
-            UnaryExpression.Rule =
-                PrimaryExpression
-                | Plus + UnaryExpression
-                | Minus + UnaryExpression
-                //| PlusPlus + UnaryExpression
-                //| Minus + UnaryExpression
-                //| Ampersand + UnaryExpression
-                //| Asterisk + UnaryExpression
-                ;
+
+            // primary expresson
             PrimaryExpression.Rule =
-                PrimaryExpressionStart + IndexBracketOpt;
-            PrimaryExpressionStart.Rule = Literal | Identifier | LParen + Expression + RParen;
-            AssignmentOperator.Rule = Equals;
-            IndexBracket.Rule = LBracket + RBracket;
+                Literal
+                | UnaryExpression
+                | MemberAccess;
 
             // literal
-            Literal.Rule = TrueKeyword | FalseKeyword;
+            Literal.Rule = NumberLiteral | StringLiteral | TrueKeyword | FalseKeyword;
+
+            UnaryExpression.Rule =
+               UnaryOperator + PrimaryExpression;
+            UnaryOperator.Rule =
+                Plus
+                | Minus
+                | Exclamation
+                | Asterisk;
+
+            MemberAccess.Rule = Identifier + MemberAccessSegmentsOpt;
+            MemberAccessSegmentsOpt.Rule = MakeStarRule(MemberAccessSegmentsOpt, MemberAccessSegment);
+            MemberAccessSegment.Rule =
+                Dot + Identifier;
 
             // function expression
             FunctionExpression.Rule =
@@ -355,13 +365,14 @@ namespace Cecilia.Compiler.Analyzer
                 LParen + FunctionParameterList + RParen
                 | Identifier;
             FunctionParameterList.Rule =
-                MakePlusRule(FunctionParameterList, Comma, FunctionParameter);
+                MakeStarRule(FunctionParameterList, Comma, FunctionParameter);
             FunctionParameter.Rule =
                 Identifier + TypeAnnotationOpt;
             FunctionBody.Rule =
                 Expression | Block;
             ExpressionListOpt.Rule = ExpressonList.Q();
             ExpressonList.Rule = MakePlusRule(ExpressonList, Expression);
+            #endregion
 
             #endregion
 
